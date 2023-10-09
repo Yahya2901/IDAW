@@ -1,5 +1,5 @@
-{head
-    border-width: 2px;
+head{
+    border-width: 100px;
     border-style: solid;
     border-color: red;
 }
