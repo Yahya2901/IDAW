@@ -1,0 +1,102 @@
+/* Style pour le corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style pour l'en-tête (h1) */
+h1 {
+    
+    font-size: 25px;
+    text-align: center;
+}
+
+/* Style pour les sous-titres (h2) */
+h2 {
+    font-size: 20px;
+}
+
+/* Style pour l'image */
+img {
+    height: 180px;
+    width: 160px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Style pour la section des expériences professionnelles */
+h3 u {
+    text-decoration: underline;
+}
+
+/* Style pour la section de la liste de navigation */
+.menu {
+    text-align: center;
+}
+
+.menu p {
+    font-weight: bold;
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Style pour les sections de texte */
+p {
+    margin: 0 20px;
+    line-height: 1.5;
+}
+
+/* Style pour la section des certificats et des compétences */
+h2 {
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+/* Style pour la liste des compétences */
+ul {
+    list-style-type: square;
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+/* Style pour les éléments de liste */
+li {
+    margin-bottom: 10px;
+}
+
+/* Style pour la ligne de séparation */
+hr {
+    border: 1px solid #ccc;
+    margin: 20px 0;
+}
+/* Style pour tous les liens du menu */
+.menu ul li a {
+    color: #000; /* Couleur du texte par défaut */
+    background-color: transparent; /* Fond transparent par défaut */
+    padding: 10px 20px; /* Espace autour du texte pour le remplissage */
+    text-decoration: none; /* Supprime les soulignements par défaut des liens */
+    transition: background-color 0.3s; /* Animation de transition pour une couleur de fond fluide */
+}
+
+/* Style pour les liens actifs (sélectionnés) du menu */
+.menu ul li a:hover,
+.menu ul li a:focus {
+    background-color: #ff0000; /* Couleur de fond différente pour les liens au survol ou au focus */
+    color: #fff; /* Couleur du texte pour les liens au survol ou au focus */
+}
