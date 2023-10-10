@@ -22,7 +22,6 @@ require_once('template_header.php');
         <img src="tennis.jpg" alt="raquette de tennis">
         <br> 
         J'ai pratiqué le tennis en niveau amateur pendant 3 ans, et je le vois comme étant un sport competitif et qui necessite un souffle important pour survivre tout le match. 
-
         
     
     </h1>
