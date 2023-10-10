@@ -84,7 +84,7 @@ require_once('template_header.php');
     </p>
 <style>
     h1{
-        Color: red;
+        
         font-size: 25px;
     }
     h2{

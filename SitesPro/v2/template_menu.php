@@ -1,4 +1,5 @@
 <?php
+
 function renderMenuToHTML($currentPageId){
     $mymenu = array(
         // idPage titre

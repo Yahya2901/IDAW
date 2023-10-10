@@ -69,3 +69,18 @@ a {
 a:hover {
     text-decoration: underline;
 }
+/* Style pour tous les liens du menu */
+.menu ul li a {
+    color: #000; /* Couleur du texte par défaut */
+    background-color: transparent; /* Fond transparent par défaut */
+    padding: 10px 20px; /* Espace autour du texte pour le remplissage */
+    text-decoration: none; /* Supprime les soulignements par défaut des liens */
+    transition: background-color 0.3s; /* Animation de transition pour une couleur de fond fluide */
+}
+
+/* Style pour les liens actifs (sélectionnés) du menu */
+.menu ul li a:hover,
+.menu ul li a:focus {
+    background-color: #ff0000; /* Couleur de fond différente pour les liens au survol ou au focus */
+    color: #fff; /* Couleur du texte pour les liens au survol ou au focus */
+}
