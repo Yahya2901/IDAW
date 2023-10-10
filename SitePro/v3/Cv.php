@@ -1,6 +1,4 @@
-<?php
-require_once('template_header.php');
-?>
+
 
 <h1>
 <img src="Personal Photo.jpg"  alt="Personal Photo"> 
@@ -15,10 +13,7 @@ require_once('template_header.php');
 </h1>
 
     <hr>
-            <?php
-            require_once('template_menu.php');
-            renderMenuToHTML('Cv');
-            ?>
+            
 
     </p>
     <hr>
@@ -154,8 +149,6 @@ Allemand: Niveau débutant
 </p>
 <hr>
 
-<?php
-require_once('template_footer.php');
-?>
+
 
 </html>

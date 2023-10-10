@@ -1,10 +1,5 @@
-<?php
-require_once('template_header.php');
-?>
-    <?php
-            require_once('template_menu.php');
-            renderMenuToHTML('Hobbies');
-    ?>
+
+
     
 
 
@@ -26,9 +21,7 @@ require_once('template_header.php');
         
     
     </h1>
-<?php
-require_once('template_footer.php');
-?>
+
 <style>
     img{
         height: 180px;

@@ -1,102 +1,85 @@
 /* Style pour le corps de la page */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #f5f5f5;
     margin: 0;
     padding: 0;
-}
-
-/* Style pour l'en-tête (h1) */
-h1 {
-    
-    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 
-/* Style pour les sous-titres (h2) */
-h2 {
-    font-size: 20px;
+/* Style pour l'en-tête avec l'image et le texte */
+h1 {
+    font-size: 32px;
+    margin: 20px 0;
 }
 
-/* Style pour l'image */
 img {
-    height: 180px;
-    width: 160px;
-    display: block;
-    margin: 0 auto;
+    border-radius: 50%; /* Pour un effet de cercle autour de la photo */
+    width: 150px;
+    height: 150px;
+    object-fit: cover; /* Pour ajuster la taille de l'image */
+    border: 5px solid #fff; /* Bordure blanche autour de la photo */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Ombre légère autour de la photo */
 }
 
-/* Style pour la section des expériences professionnelles */
-h3 u {
+/* Style pour le paragraphe de présentation */
+p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 20px 0;
+}
+
+/* Style pour les titres de section */
+h2 {
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+/* Style pour les sous-titres */
+h3 {
+    font-size: 20px;
+    margin: 10px 0;
     text-decoration: underline;
 }
 
-/* Style pour la section de la liste de navigation */
-.menu {
-    text-align: center;
-}
-
-.menu p {
-    font-weight: bold;
-}
-
-.menu ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.menu li {
-    display: inline;
-    margin-right: 20px;
-}
-
-.menu a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-}
-
-/* Style pour les sections de texte */
-p {
-    margin: 0 20px;
-    line-height: 1.5;
-}
-
-/* Style pour la section des certificats et des compétences */
-h2 {
-    font-size: 20px;
-    margin-top: 20px;
-}
-
-/* Style pour la liste des compétences */
+/* Style pour les listes à puces */
 ul {
-    list-style-type: square;
+    text-align: left;
+    list-style-type: disc;
     margin-left: 20px;
-    padding-left: 0;
 }
 
-/* Style pour les éléments de liste */
-li {
-    margin-bottom: 10px;
-}
-
-/* Style pour la ligne de séparation */
+/* Style pour les lignes horizontales */
 hr {
-    border: 1px solid #ccc;
-    margin: 20px 0;
-}
-/* Style pour tous les liens du menu */
-.menu ul li a {
-    color: #000; /* Couleur du texte par défaut */
-    background-color: transparent; /* Fond transparent par défaut */
-    padding: 10px 20px; /* Espace autour du texte pour le remplissage */
-    text-decoration: none; /* Supprime les soulignements par défaut des liens */
-    transition: background-color 0.3s; /* Animation de transition pour une couleur de fond fluide */
+    border: none;
+    border-top: 2px solid #333;
+    width: 80%;
+    margin: 20px auto;
 }
 
-/* Style pour les liens actifs (sélectionnés) du menu */
-.menu ul li a:hover,
-.menu ul li a:focus {
-    background-color: #ff0000; /* Couleur de fond différente pour les liens au survol ou au focus */
-    color: #fff; /* Couleur du texte pour les liens au survol ou au focus */
+/* Style pour les liens */
+a {
+    color: #007BFF;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* Style pour les compétences et les langues */
+p.skills {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* Style pour les centres d'intérêt */
+p.interests {
+    font-size: 16px;
+    margin: 10px 0;
 }
