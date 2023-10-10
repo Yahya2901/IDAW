@@ -1,0 +1,57 @@
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+/* Style de l'en-tête */
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Style du titre principal */
+h1 {
+    font-size: 36px;
+    margin-top: 20px;
+    color: #333;
+}
+
+/* Style du texte principal */
+p {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #666;
+    margin: 20px;
+}
+
+/* Style du menu de navigation */
+.menu {
+    background-color: #444;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+.menu p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.menu li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.menu a:hover {
+    text-decoration: underline;
+}

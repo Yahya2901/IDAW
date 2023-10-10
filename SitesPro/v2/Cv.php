@@ -1,29 +1,23 @@
-<html> 
+<?php
+require_once('template_header.php');
+?>
 
-<body>
-
-    <head>
-    <link rel="stylesheet" href="Style.css">
+<h1>
+<img src="Personal Photo.jpg"  alt="Personal Photo"> 
 
 
-    <p>
-        Je suis un Eleve ingenieur M2 à l'IMT Nord EUROPE à la recherche d'une opportunité d'emploi dans l'industrie du luxe.
-        Je cherche une opportunité d'emploi en Supply chain, precisemment dnas la logistique, l'Approvisionnement ou les Achats. 
-        Motivé, passioné par le l'industrie du Luxe , je me vois comme étant le candidat idéal pour occuper un poste Supply chain dans votre entreprise du Luxe. 
+<p>
+    Je suis un Eleve ingenieur M2 à l'IMT Nord EUROPE à la recherche d'une opportunité d'emploi dans l'industrie du luxe.
+    Je cherche une opportunité d'emploi en Supply chain, precisemment dnas la logistique, l'Approvisionnement ou les Achats. 
+    Motivé, passioné par le l'industrie du Luxe , je me vois comme étant le candidat idéal pour occuper un poste Supply chain dans votre entreprise du Luxe. 
 
-    </p>    
-    </head>
+</p>    
+</h1>
+
     <hr>
-        <nav class="menu">
-            <p>
-                Veuillez cliquer sur une liste déroulante ci dessous:
-            </p>
-            <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="Cv.html">Cv</a></li>
-            <li><a href="Hobbies.html">Hobbies</a></li>
-            </ul>
-            </nav>
+            <?php
+            require_once('template_menu.php');
+            ?>
 
     </p>
     <hr>
@@ -159,6 +153,8 @@ Allemand: Niveau débutant
 </p>
 <hr>
 
-</body>
+<?php
+require_once('template_footer.php');
+?>
 
 </html>
