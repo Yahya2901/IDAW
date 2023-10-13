@@ -1,4 +1,5 @@
 <?php
+session_start();
 // on simule une base de données
 $users = array(
 // login => password
@@ -14,19 +15,15 @@ $tryPwd=$_POST['password'];
 // si login existe et password correspond
 if( array_key_exists($tryLogin,$users) && $users[$tryLogin]==$tryPwd ) {
 $successfullyLogged = true;
+$_SESSION['username'] = $tryLogin;
 $login = $tryLogin;
+if (isset($_SESSION['username'])) {
+    echo "<h1>Bienvenu " . $_SESSION['username'] . "</h1>";
+    echo '<a href="logout.php">Se déconnecter</a>';
+}
 } else
 $errorText = "Erreur de login/password";
 }  else
 $errorText = "Merci d'utiliser le formulaire de login";
-if(!$successfullyLogged) {
-echo $errorText;
-} else {
-echo "<h1>Bienvenu ".$login."</h1>";
-echo "Le login est = ".$login .  "Le mot de passe est = ". $tryPwd ;
-}
-
-
-
 
 ?>
