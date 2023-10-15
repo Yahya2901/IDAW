@@ -1,5 +1,7 @@
 
-
+<head>
+<meta charset="utf-8">
+</head>
 <h1>
 <img src="Personal Photo.jpg"  alt="Personal Photo"> 
 

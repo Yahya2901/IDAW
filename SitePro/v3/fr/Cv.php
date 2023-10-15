@@ -1,5 +1,7 @@
 
-
+<head>
+<meta charset="utf-8">
+</head>
 <h1>
 <img src="Personal Photo.jpg"  alt="Personal Photo"> 
 
@@ -24,6 +26,21 @@
     <br>
     <h3>
         <u>
+        Apprenti Ingénieur à L'Oréal:
+        </u>
+    
+    </h3>
+    <br>
+        <p>
+            Gérer l'approvisionnement et le stock des articles de conditionnement selon le plan de production.
+            <br>
+            Contribution à l'amélioration du Service en termes de Méthodes, Processus et Outils de travail
+            <br>
+            Participer à la consolidation des KPI de ses fournisseurs, et préparer les réunions d'animation pour les revues de performance.
+        </p>
+    <br>
+    <h3>
+        <u>
         Stagiaire Assistant Ingénieur à Airbus:
         </u>
     
@@ -34,7 +51,7 @@
             améliorant la qualité au sein des lignes de l'A350, 
             Bombardier G7500 et A330
             <br>
-            La mise en oeuvre d'un plan d’action visant à améliorer
+            La mise en oeuvre d'un plan d'action visant à améliorer
             efficacité du pilotage de la ligne.
             <br>
             Analyse des écarts de performance, SQCD.
@@ -67,6 +84,8 @@
     <br>
     <p>
         Double diplomation: Integration de l'Ecole en 2022 et diplomation en 2024.
+        <br>
+        Modules notables: Recherche operationnelle, Gestion de la Production, Systemes automatisés industriels. 
     </p>
     <br>
     <h3>
@@ -77,6 +96,8 @@
     <br>
     <p>
         Filiere: Génie Industriel: : Integration de l'Ecole entre 2020 et 2022, apres deux ans de classes préparatoires option MP
+        <br>
+        Modules notables: Supply Chain, Gestion de la production, Automatisme, Automatique. 
     </p>
 <style>
     h1{
@@ -105,7 +126,7 @@
 <p>
     Certificat TOEIC: Score 900
     <br>
-    Yellow and Green Belt Lean: 7 shapes school 
+    Yellow and Green Belt Lean: 7 shapes school
 </p>
 <br>
 <h2>
@@ -119,7 +140,11 @@
     <br>
     Power BI 
     <br>
-    Production Management 
+    Production Management
+    <br>
+    SAP
+    <br>
+    Visual Basic 
 
 </p>
 <br>
@@ -144,7 +169,7 @@ Allemand: Niveau débutant
 <p>
     Voyages: Découverte
     <br>
-    Sport: Boxe Anglaise
+    Sport: Boxe Anglaise, Tennis
     <br>
     Formula One: Grand Fan
 </p>

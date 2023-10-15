@@ -1,16 +1,21 @@
+<html>
+
+<head>
+<meta charset="utf-8">
+</head>
 
 
-<h1>
+<body>
 <img src="Personal Photo.jpg"  alt="Personal Photo"> 
 
 
 <p>
     Je suis un Eleve ingenieur M2 à l'IMT Nord EUROPE à la recherche d'une opportunité d'emploi dans l'industrie du luxe.
-    Je cherche une opportunité d'emploi en Supply chain, precisemment dnas la logistique, l'Approvisionnement ou les Achats. 
-    Motivé, passioné par le l'industrie du Luxe , je me vois comme étant le candidat idéal pour occuper un poste Supply chain dans votre entreprise du Luxe. 
+    Je cherche une opportunité d'emploi en Supply chain, precisemment dans la logistique, l'Approvisionnement ou les Achats. 
+    Motivé, passioné par l'industrie du Luxe , je me vois comme étant le candidat idéal pour occuper un poste Supply chain dans votre entreprise du Luxe. 
 
 </p>    
-</h1>
+
 
     <hr>
             
@@ -148,7 +153,7 @@ Allemand: Niveau débutant
     Formula One: Grand Fan
 </p>
 <hr>
-
+    </body>
 
 
 </html>

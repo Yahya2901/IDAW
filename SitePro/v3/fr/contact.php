@@ -1,3 +1,6 @@
+<head>
+<meta charset="utf-8">
+</head>
 <section class="contact-section">
     <h2>Contactez-Moi</h2>
     <p><strong>Adresse:</strong> 243 Rue du kiosque 59500, Douai</p>
