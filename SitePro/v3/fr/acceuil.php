@@ -23,4 +23,4 @@
     Learn More about me via my CV and my Hobbies. 
 </h1>
  
-
+<hr>

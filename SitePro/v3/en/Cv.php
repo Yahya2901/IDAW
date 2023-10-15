@@ -7,12 +7,12 @@
 
 
 <p>
-    Je suis un Eleve ingenieur M2 à l'IMT Nord EUROPE à la recherche d'une opportunité d'emploi dans l'industrie du luxe.
-    Je cherche une opportunité d'emploi en Supply chain, precisemment dnas la logistique, l'Approvisionnement ou les Achats. 
-    Motivé, passioné par le l'industrie du Luxe , je me vois comme étant le candidat idéal pour occuper un poste Supply chain dans votre entreprise du Luxe. 
+I am a M2 Engineering student at IMT Nord EUROPE looking for a job opportunity in the luxury industry.
+    I am looking for a job opportunity in Supply Chain, specifically in Logistics, Procurement or Purchasing. 
+    Motivated and passionate about the luxury industry, I see myself as the ideal candidate for a Supply Chain position in your luxury company.
 
-</p> 
-<a href="index.php?page=Cv&lang=fr">Français</a>   
+</p>    
+<a href="index.php?page=Cv&lang=fr">Français</a>
 </h1>
 
     <hr>
@@ -21,64 +21,83 @@
     </p>
     <hr>
     <h2>
-        Experiences Professionnelles: 
+    Professional experience:
     </h2>
     <br>
     <h3>
         <u>
-        Stagiaire Assistant Ingénieur à Airbus:
+        Apprentice engineer at L'Oréal:
         </u>
     
     </h3>
     <br>
         <p>
-            Optimisation des processus de production tout en 
-            améliorant la qualité au sein des lignes de l'A350, 
-            Bombardier G7500 et A330
+        Manage the supply and stock of packaging items according to the production plan.
             <br>
-            La mise en oeuvre d'un plan d’action visant à améliorer
-            efficacité du pilotage de la ligne.
+            Helping to improve the Service in terms of working methods, processes and tools
             <br>
-            Analyse des écarts de performance, SQCD.
+            Participating in the consolidation of suppliers' KPIs, and preparing meetings for performance reviews.
         </p>
     <br>
     <h3>
         <u>
-        Stagiaire Direction des equipement et du transport:
+        Trainee Assistant Engineer at Airbus:
+        </u>
+    
+    </h3>
+    <br>
+        <p>
+        Optimising production processes while improving 
+            improving quality on the A350 production lines, 
+            Bombardier G7500 and A330
+            <br>
+            Implementation of an action plan aimed at improving
+            line management efficiency.
+            <br>
+            Performance gap analysis, SQCD.
+        </p>
+    <br>
+    <h3>
+        <u>
+        Trainee in the Department of Equipment and Transport:
         </u>
 
     </h3>
     <br>
     <p>
-        Suivi des travaux routiers.
+    Monitoring roadworks.
         <br>
-        Diagnostique du comptage routier.
+        Diagnosis of road counting.
         <br>
-        Etude de la comptabilité publique.
+        Study of public accounting.
     </p>
     <br>
     <h2>
-        Fomations Academiques
+    Academic Training
     </h2>
     <br>
     <h3>
         <u>
-        Eleve Ingenieur à l'IMT Nord Europe: Promo 2024
+        Engineering student at IMT Nord Europe: Class of 2024
     </u>
     </h3>
     <br>
     <p>
-        Double diplomation: Integration de l'Ecole en 2022 et diplomation en 2024.
+    Double diploma: Integration of the School in 2022 and graduation in 2024.
+        <br>
+        Notable modules: Operations Research, Production Management, Industrial Automated Systems.
     </p>
     <br>
     <h3>
         <u>
-        Eleve Ingenieur à Mines Rabat
+        Engineering student at Mines Rabat
     </u>
     </h3>
     <br>
     <p>
-        Filiere: Génie Industriel: : Integration de l'Ecole entre 2020 et 2022, apres deux ans de classes préparatoires option MP
+    Sector: Industrial Engineering:: Integration of the School between 2020 and 2022, after two years of preparatory classes MP option
+        <br>
+        Notable modules: Supply Chain, Production Management, Automation, Automatics.
     </p>
 <style>
     h1{
@@ -101,13 +120,13 @@
 </style>
 <br>
 <h2>
-    Certificats:
+Certificates:
 </h2>
 <br>
 <p>
-    Certificat TOEIC: Score 900
+    TOEIC Certificate: Score 900
     <br>
-    Yellow and Green Belt Lean: 7 shapes school 
+    Yellow and Green Belt Lean: 7 shapes school
 </p>
 <br>
 <h2>
@@ -121,34 +140,38 @@
     <br>
     Power BI 
     <br>
-    Production Management 
+    Production Management
+    <br>
+    SAP
+    <br>
+    Visual Basic 
 
 </p>
 <br>
 <h2>
-    Langues:
+    Languages:
 </h2>
 <br>
 <p>
-Francais: Niveau Bilingue
+French: Bilingual level 
 <br>
-Anglais: Niveau Courant
+English: Professional proficiency
 <br>
-Arabe: Niveau Bilingue
+Arabic: Bilingual level
 <br>
-Allemand: Niveau débutant
+German: Entry level
 </p>
 <br>
 <h2>
-    Centres d'interets 
+Centers of interest
 </h2>
 <br>
 <p>
-    Voyages: Découverte
+    Travel: Discovering
     <br>
-    Sport: Boxe Anglaise
+    Sport: Tennis and Boxing
     <br>
-    Formula One: Grand Fan
+    Formula One: Big fan
 </p>
 <hr>
 

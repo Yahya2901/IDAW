@@ -29,7 +29,7 @@
     }
 </style>
 
-<link rel="stylesheet" href="styles1.css">
+<link rel="stylesheet" href="Style.css">
 
 
 
