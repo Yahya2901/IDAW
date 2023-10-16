@@ -43,38 +43,48 @@ $request->execute();
 $users = $request->fetchAll(PDO::FETCH_OBJ);
 
 ?>
-
-<head>
-    <title>Users</title>
-</head>
-<body>
-    <h1>Users</h1>
-    <table border="1">
-        <tr>
-            <th>id</th>
-            <th>Name</th>
-            <th>email</th>
-            <th>Actions</th>
-        </tr>
-        <?php foreach ($users as $user) : ?>
-            <tr>
-                <td><?php echo $user->id; ?></td>
-                <td><?php echo $user->name; ?></td>
-                <td><?php echo $user->email; ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-</body>
-</html>
-
-
-
-
-
-
 <?php
-$pdo = null;
-?>
+echo "<table border='1'>";
+echo "<tr>";
+echo "<th>id</th>";
+echo "<th>Name</th>";
+echo "<th>email</th>";
+echo "<th>Actions</th>";
+echo "</tr>";
+foreach ($users as $user) {
+    echo "<tr>";
+    echo "<td>" . $user->id . "</td>";
+    echo "<td>" . $user->name . "</td>";
+    echo "<td>" . $user->email . "</td>";
+    echo "<td>";
+    echo "<form action='' method='post'>
+          <input type='hidden' name='action' value='delete'>
+          <input type='hidden' name='id' value='".$user->id."'>
+          <input type='submit' value='Supprimer'>
+          </form>";
+    echo "<form action='' method='post'>
+          <input type='hidden' name='action' value='update'>
+          <input type='hidden' name='id' value='".$user->id."'>
+          Nom: <input type='text' name='name' value='".$user->name."'>
+          Email: <input type='text' name='email' value='".$user->email."'>
+          <input type='submit' value='Modifier'>
+          </form>";
+    echo "</td>";
+    echo "</tr>";
+}
+echo "</table>";
+echo "<h3>Ajouter un utilisateur</h3>";
+echo "<form action='' method='post'>";
+echo "<label for='name'>Nom :</label>";
+echo "<input type='text' id='name' name='name'>";
+echo "<label for='email'>Email :</label>";
+echo "<input type='email' id='email' name='email'>";
+echo "<input type='hidden' name='action' value='add'>";
+echo "<input type='submit' value='Ajouter'>";
+echo "</form>";
+
+
+$pdo = NULL;
 
 
 
