@@ -19,14 +19,14 @@ echo 'Erreur : '.$erreur->getMessage();
 if(isset($_POST['action']) && $_POST['action'] == 'add') {
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $stmt = $pdprepare("INSERT INTO users (name, email) VALUES (?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO users (name, email) VALUES (?, ?)");
     $stmt->execute([$name, $email]);
 }
 
 // Code pour supprimer un utilisateur
 if(isset($_POST['action']) && $_POST['action'] == 'delete') {
     $id = $_POST['id'];
-    $stmt = $pdprepare("DELETE FROM users WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
     $stmt->execute([$id]);
 }
 
@@ -35,7 +35,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'update') {
     $id = $_POST['id'];
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $stmt = $pdprepare("UPDATE users SET name = ?, email = ? WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE users SET name = ?, email = ? WHERE id = ?");
     $stmt->execute([$name, $email, $id]);
 }
 $request = $pdo->prepare("select * from users");
@@ -85,6 +85,3 @@ echo "</form>";
 
 
 $pdo = NULL;
-
-
-
