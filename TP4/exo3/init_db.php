@@ -5,23 +5,14 @@ try {
     $pdo = new PDO("mysql:host=" . _MYSQL_HOST . ";port=" . _MYSQL_PORT . ";dbname=" . _MYSQL_DBNAME, _MYSQL_USER, _MYSQL_PASSWORD);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Nom du fichier SQL à exécuter
-    $sqlFile = 'create_db.sql'; 
-  
+    // Charger le contenu du fichier SQL
+    $sqlFile = 'sql/create_db.sql'; // Remplacez ceci par le chemin complet vers votre fichier SQL
+
     if (file_exists($sqlFile)) {
         $sqlQueries = file_get_contents($sqlFile);
 
-        // Séparation des requêtes SQL par des points-virgules
-        $queries = explode(';', $sqlQueries);
-
-        foreach ($queries as $query) {
-            $query = trim($query);
-
-            if (!empty($query)) {
-                $pdo->exec($query);
-            }
-        }
-
+        // Exécutez les requêtes SQL
+        $pdo->exec($sqlQueries);
         echo "Le fichier SQL a été exécuté avec succès.";
     } else {
         echo "Le fichier SQL n'a pas été trouvé.";
@@ -33,5 +24,3 @@ try {
     echo 'Erreur : ' . $erreur->getMessage();
 }
 ?>
-
-
