@@ -1,1 +1,1 @@
-Hello, my name is Yahya. I'm new here and i'm currently learning Web Developpment. It looks interesting for me the fact that we can put anything we want on a server and put it online. 
+Hello, my name is Yahya. I'm new here and i'm currently learning Web Developpment. 
