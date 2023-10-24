@@ -1,4 +1,13 @@
 <?php
+// Démarrer la session
+session_start();
+
+// Vérifier si l'utilisateur est déjà connecté, rediriger s'il est connecté
+if (isset($_SESSION['user_id'])) {
+    header('Location: aliments.php');
+    exit();
+}
+
 // Connexion à la base de données
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -10,6 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Insérez les données de l'utilisateur dans la base de données
     // Assurez-vous d'ajouter une validation et une sécurité appropriées ici
+
+    // Après l'inscription, stockez les informations de l'utilisateur dans la session
+    $_SESSION['user_id'] = $user_id; // Assurez-vous d'obtenir l'ID de l'utilisateur après l'insertion
+
+    // Redirigez l'utilisateur vers la page d'historique des aliments
+    header('Location: food_history.php');
+    exit();
 }
 ?>
 
