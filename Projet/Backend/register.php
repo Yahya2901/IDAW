@@ -1,5 +1,4 @@
 <?php
-// Démarrer la session
 session_start();
 
 // Vérifier si l'utilisateur est déjà connecté, rediriger s'il est connecté
@@ -24,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['user_id'] = $user_id; // Assurez-vous d'obtenir l'ID de l'utilisateur après l'insertion
 
     // Redirigez l'utilisateur vers la page d'historique des aliments
-    header('Location: food_history.php');
+    header('Location: aliments.php');
     exit();
 }
 ?>
