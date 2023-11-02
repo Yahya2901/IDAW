@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>IMangerMieux - Tracker d'Aliments et de Calories</title>
+    <title> iMangerMieux - Tracker d'Aliments et de Calories </title>
 </head>
+
 <body>
     <header>
         <h1>Bienvenue sur iMangerMieux</h1>
         <p>Un Outil Simple pour suivre vos aliments et calories, pour une vie saine et energetique.</p>
+        <a href="profil.php">Voir mon profil</a>
     </header>
 
     <nav>
@@ -17,13 +19,6 @@
             <li><a href="profil.php">Profil</a></li>
         </ul>
     </nav>
-
-    <main>
-        <h2>Tableau de Bord</h2>
-        <p>Bienvenue sur votre tableau de bord iMangerMieux.</p>
-        <p>Connectez-vous pour commencer à suivre vos aliments et calories.</p>
-        <a href="register.php">Se Connecter</a>
-    </main>
     <main>
         <h2>Suivi de Nutrition</h2>
         <div class="nutrition-data">
@@ -47,8 +42,12 @@
     </main>
 
     <footer>
-        <p>&copy; 2023 Tableau de Bord de Suivi de Nutrition. Tous droits réservés.</p>
+        <p>&copy; 2023 Tableau de Bord de Suivi de Nutrition.</p>
     </footer>
+
+    <form action="logout.php" method="POST">
+        <button type="submit">Se déconnecter</button>
+    </form>
 </body>
 </html>
 
@@ -58,7 +57,7 @@
 
 
     <footer>
-        <p>&copy; 2023 IMangerMieux. Tous droits réservés.</p>
+        <p>&copy; 2023 iMangerMieux.</p>
     </footer>
 </body>
 </html>

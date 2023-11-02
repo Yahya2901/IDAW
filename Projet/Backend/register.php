@@ -3,7 +3,7 @@ session_start();
 
 // Vérifier si l'utilisateur est déjà connecté, rediriger s'il est connecté
 if (isset($_SESSION['user_id'])) {
-    header('Location: aliments.php');
+    header('Location: accueil.php');
     exit();
 }
 
@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $age = $_POST['age'];
     $gender = $_POST['gender'];
     $activity_level = $_POST['activity_level'];
+    $password = $_POST['password'];
 
     // Insérez les données de l'utilisateur dans la base de données
     // Assurez-vous d'ajouter une validation et une sécurité appropriées ici
@@ -22,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Après l'inscription, stockez les informations de l'utilisateur dans la session
     $_SESSION['user_id'] = $user_id; // Assurez-vous d'obtenir l'ID de l'utilisateur après l'insertion
 
-    // Redirigez l'utilisateur vers la page d'historique des aliments
-    header('Location: Acceuil.php');
+    
+    header('Location: Accueil.php');
     exit();
 }
 ?>
@@ -31,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- Formulaire d'inscription -->
 <form method="POST" action="register.php">
     <input type="text" name="login" placeholder="Login" required>
+    <input type="password" name="password" placeholder="Mot de passe" required> <!-- Champ de mot de passe -->
     <input type="number" name="age" placeholder="Age" required>
     <select name="gender">
         <option value="homme">Homme</option>
