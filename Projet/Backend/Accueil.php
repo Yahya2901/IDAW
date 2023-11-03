@@ -2,7 +2,6 @@
 <html>
 <head>
     <title> iMangerMieux - Tracker d'Aliments et de Calories </title>
-    
 </head>
 
 <body>
@@ -19,27 +18,13 @@
             <li><a href="profil.php">Voir mon Profil</a></li>
         </ul>
     </nav>
-    <main>
-        <h2>Suivi de Nutrition</h2>
-        <div class="nutrition-data">
-            <div class="nutrition-item">
-                <h3>Calories</h3>
-                <p>Nombre de calories consommées aujourd'hui : 2000</p>
-            </div>
-            <div class="nutrition-item">
-                <h3>Glucides</h3>
-                <p>Nombre de grammes de glucides consommés aujourd'hui : 300g</p>
-            </div>
-            <div class="nutrition-item">
-                <h3>Protéines</h3>
-                <p>Nombre de grammes de protéines consommés aujourd'hui : 80g</p>
-            </div>
-            <div class="nutrition-item">
-                <h3>Graisses (lipides)</h3>
-                <p>Nombre de grammes de graisses consommés aujourd'hui : 60g</p>
-            </div>
-        </div>
-    </main>
+    <body>
+    <div class="circle">
+        <div class="calories">0</div>
+        <div class="label">Calories</div>
+    </div>
+
+    <script src="script.js"></script>
 
     <footer>
         <p>&copy; 2023 Tableau de Bord de Suivi de Nutrition.</p>
