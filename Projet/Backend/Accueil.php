@@ -9,15 +9,14 @@
     <header>
         <h1>Bienvenue sur iMangerMieux</h1>
         <p>Un Outil Simple pour suivre vos aliments et calories, pour une vie saine et energetique.</p>
-        <a href="profil.php">Voir mon profil</a>
+       
     </header>
 
     <nav>
         <ul>
             <li><a href="accueil.php">Accueil</a></li>
-            <li><a href="aliments.php">Mes Aliments</a></li>
-            <li><a href="suivi.php">Suivi</a></li>
-            <li><a href="profil.php">Profil</a></li>
+            <li><a href="suivi.php">Historique des aliments</a></li>
+            <li><a href="profil.php">Voir mon Profil</a></li>
         </ul>
     </nav>
     <main>
@@ -49,15 +48,8 @@
     <form action="logout.php" method="POST">
         <button type="submit">Se déconnecter</button>
     </form>
-
 </body>
 </html>
-
-
-
-
-
-
     <footer>
         <p>&copy; 2023 iMangerMieux.</p>
     </footer>
