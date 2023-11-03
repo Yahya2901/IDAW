@@ -2,6 +2,7 @@
 <html>
 <head>
     <title> iMangerMieux - Tracker d'Aliments et de Calories </title>
+    
 </head>
 
 <body>
@@ -48,6 +49,7 @@
     <form action="logout.php" method="POST">
         <button type="submit">Se déconnecter</button>
     </form>
+
 </body>
 </html>
 
