@@ -45,48 +45,31 @@
     <footer>
         <p>&copy; 2023 iMangerMieux.</p>
     </footer>
-</body>
-<div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                DataTable Example
-                            </div>
-                            <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                    <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
-</html>
+    
+</head>
+<body>
+
+<!-- Table HTML -->
+<table id="usersTable" class="display">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Calories</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<!-- Modal for editing users -->
+<div id="editModal" style="display:none; position:fixed; top:50%; left:50%; transform: translate(-50%, -50%); background:white; padding:20px;">
+    <h2>Edit User</h2>
+    <form id="editForm">
+        <input type="hidden" id="userId" name="userId">
+        Name: <input type="text" id="userName" name="userName"><br><br>
+        Email: <input type="text" id="userEmail" name="userEmail"><br><br>
+        <input type="button" value="Save" onclick="saveEdit()">
+        <input type="button" value="Cancel" onclick="closeEdit()">
+    </form>
+</div>
