@@ -36,8 +36,12 @@
                                                 </div>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
-                                                <label for="inputEmail">Email address</label>
+                                                <input class="form-control" id="inputSexe" type="Sexe" placeholder="H/F" />
+                                                <label for="inputSexe">Sexe</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="inputNiveau d'activité" type="Niveau d'activité" placeholder="H/F" />
+                                                <label for="inputNiveau d'activité">Niveau d'activité</label>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
@@ -71,7 +75,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                            <div class="text-muted">Copyright &copy; iMangerMieux 2023</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
