@@ -8,7 +8,7 @@ $connectionString .= ";dbname=" . _MYSQL_DBNAME;
 $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8' );
 $pdo = NULL;
 try {
-    $db = new PDO('mysql:host=hostname;dbname=food_tracker', 'username', 'password');
+    $db = new PDO('mysql:host=hostname;dbname=dbfood', 'username', 'password');
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Erreur de connexion à la base de données: " . $e->getMessage());
