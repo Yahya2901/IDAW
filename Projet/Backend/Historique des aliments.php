@@ -20,7 +20,7 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Email</th>
+            <th>Calories</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -33,7 +33,7 @@
     <form id="editForm">
         <input type="hidden" id="userId" name="userId">
         Name: <input type="text" id="userName" name="userName"><br><br>
-        Email: <input type="text" id="userEmail" name="userEmail"><br><br>
+        calories: <input type="text" id="usercalories" name="usercalories"><br><br>
         <input type="button" value="Save" onclick="saveEdit()">
         <input type="button" value="Cancel" onclick="closeEdit()">
     </form>
@@ -49,20 +49,20 @@ $(document).ready(function() {
         "columns": [
             { "data": "id" },
             { "data": "name" },
-            { "data": "email" },
+            { "data": "calories" },
             {
                 "data": null,
                 "render": function(data, type, row) {
-                    return `<button onclick="editUser(${data.id}, '${data.name}', '${data.email}')">Edit</button> <button onclick="deleteUser(${data.id})">Delete</button>`;
+                    return `<button onclick="editUser(${data.id}, '${data.name}', '${data.calories}')">Edit</button> <button onclick="deleteUser(${data.id})">Delete</button>`;
                 }
             }
         ]
     });
 
-    window.editUser = function(id, name, email) {
+    window.editUser = function(id, name, calories) {
         document.getElementById("userid").value = id;
         document.getElementById("username").value = name;
-        document.getElementById("useremail").value = email;
+        document.getElementById("usercalories").value = calories;
         document.getElementById("editModal").style.display = "block";
     };
 
@@ -88,12 +88,12 @@ $(document).ready(function() {
     window.saveEdit = function() {
         const id = document.getElementById("userid").value;
         const name = document.getElementById("username").value;
-        const email = document.getElementById("useremail").value;
+        const calories = document.getElementById("usercalories").value;
 
         $.ajax({
             url: `http://localhost/IDAW/Projet/Backend/users.php?id=${id}`,
             type: 'PUT',
-            data: JSON.stringify({ name: name, email: email }),
+            data: JSON.stringify({ name: name, calories: calories }),
             contentType: 'application/json',
             success: function() {
                 table.ajax.reload();
