@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Connexion à la base de données
 
 // Requête pour récupérer l'historique des aliments consommés par l'utilisateur
-$query = "SELECT * FROM food_entries WHERE user_id = :user_id ORDER BY date_consumed DESC";
+$query = "SELECT * FROM dbfood WHERE user_id = :user_id ORDER BY date_consumed DESC";
 $stmt = $db->prepare($query);
 $stmt->bindParam(':user_id', $_SESSION['user_id']);
 $stmt->execute();
@@ -56,17 +56,17 @@ $food_entries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <table>
     <thead>
         <tr>
-            <th>Nom de l'aliment</th>
-            <th>Quantité</th>
-            <th>Date consommée</th>
+            <th>col1</th>
+            <th>col2</th>
+            <th>col3</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($food_entries as $entry) : ?>
             <tr>
-                <td><?= $entry['food_name'] ?></td>
-                <td><?= $entry['quantity'] ?></td>
-                <td><?= $entry['date_consumed'] ?></td>
+                <td><?= $entry['col1'] ?></td>
+                <td><?= $entry['col2'] ?></td>
+                <td><?= $entry['col3'] ?></td>
             </tr>
         <?php endforeach; ?>
     </tbody>

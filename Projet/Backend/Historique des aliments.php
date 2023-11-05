@@ -14,7 +14,9 @@
     <header>
         <h1>Aliments</h1>
         
-       <!-- Table HTML -->
+ 
+
+<!-- Table HTML -->
 <table id="usersTable" class="display">
     <thead>
         <tr>
@@ -31,14 +33,16 @@
 <div id="editModal" style="display:none; position:fixed; top:50%; left:50%; transform: translate(-50%, -50%); background:white; padding:20px;">
     <h2>Edit User</h2>
     <form id="editForm">
-        <input type="hidden" id="userId" name="userId">
-        Name: <input type="text" id="userName" name="userName"><br><br>
-        calories: <input type="text" id="usercalories" name="usercalories"><br><br>
+        <input type="hidden" id="usercol1" name="usercol1">
+        Name: <input type="text" id="usercol2" name="usercol2"><br><br>
+        Calories: <input type="text" id="usercol3" name="usercol3"><br><br>
         <input type="button" value="Save" onclick="saveEdit()">
         <input type="button" value="Cancel" onclick="closeEdit()">
     </form>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script>
 $(document).ready(function() {
     const table = $('#usersTable').DataTable({
@@ -47,22 +51,22 @@ $(document).ready(function() {
             "dataSrc": ""  // Utilisation de la clé "users" comme source de données
         },
         "columns": [
-            { "data": "id" },
-            { "data": "name" },
-            { "data": "calories" },
+            { "data": "col1" },
+            { "data": "col2" },
+            { "data": "col3" },
             {
                 "data": null,
                 "render": function(data, type, row) {
-                    return `<button onclick="editUser(${data.id}, '${data.name}', '${data.calories}')">Edit</button> <button onclick="deleteUser(${data.id})">Delete</button>`;
+                    return `<button onclick="editUser(${data.col1}, '${data.col2}', '${data.col3}')">Edit</button> <button onclick="deleteUser(${data.col1})">Delete</button>`;
                 }
             }
         ]
     });
 
     window.editUser = function(id, name, calories) {
-        document.getElementById("userid").value = id;
-        document.getElementById("username").value = name;
-        document.getElementById("usercalories").value = calories;
+        document.getElementById("usercol1").value = id;
+        document.getElementById("usercol2").value = name;
+        document.getElementById("usercol3").value = calories;
         document.getElementById("editModal").style.display = "block";
     };
 
@@ -86,9 +90,9 @@ $(document).ready(function() {
     };
 
     window.saveEdit = function() {
-        const id = document.getElementById("userid").value;
-        const name = document.getElementById("username").value;
-        const calories = document.getElementById("usercalories").value;
+        const id = document.getElementById("usercol1").value;
+        const name = document.getElementById("usercol2").value;
+        const calories = document.getElementById("usercol3").value;
 
         $.ajax({
             url: `http://localhost/IDAW/Projet/Backend/users.php?id=${id}`,
@@ -109,3 +113,4 @@ $(document).ready(function() {
 
 </body>
 </html>
+
