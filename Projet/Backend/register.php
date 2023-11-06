@@ -11,11 +11,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 </head>
-<?php
-session_start();
 
+
+<?php
+
+
+
+session_start();
+require_once 'config.php';
 // Vérifier si l'utilisateur est déjà connecté, rediriger s'il est connecté
-if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['id'])) {
     header('Location: accueil.php');
     exit();
 }
@@ -29,15 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $gender = $_POST['gender'];
     $activity_level = $_POST['activity_level'];
     $password = $_POST['password'];
-
-    // Assurez-vous d'ajouter une validation et une sécurité appropriées ici
-
-    // Après l'inscription, stockez les informations de l'utilisateur dans la session
-    $_SESSION['user_id'] = $user_id; // Assurez-vous d'obtenir l'ID de l'utilisateur après l'insertion
-
-    header('Location: Accueil.php');
-    exit();
-}
+    
+}   
 ?>
 
 <!-- Ajout du paragraphe "Inscrivez-vous" -->
