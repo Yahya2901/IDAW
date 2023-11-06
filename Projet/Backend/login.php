@@ -8,11 +8,11 @@ session_start();
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['login'];
+    $login = $_POST['login'];
     $password = $_POST['password'];
 
     // Vérifier les identifiants de l'utilisateur
-    if ($username === $_SESSION['login'] && $password === 'password') {
+    if ($login === $_SESSION['login'] && $password === 'password') {
         // Identifiants valides, connectez l'utilisateur et redirigez vers la page d'accueil
         $_SESSION['id'] = $id; // Vous pouvez stocker l'ID de l'utilisateur dans la session
         header('Location: accueil.php');
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ?>
     <form action="login.php" method="POST">
         <label for="login">login:</label>
-        <input type="text" name="username" required><br>
+        <input type="text" name="login" required><br>
         <label for="password">Mot de passe :</label>
         <input type="password" name="password" required><br>
         <button type="submit">Se connecter</button>

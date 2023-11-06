@@ -13,10 +13,7 @@
 <body>
     <header>
         <h1>Mon Profil</h1>
-        
-       
     </header>
-    
     <nav>
         <ul>
             <li><a href="accueil.php">Accueil</a></li>

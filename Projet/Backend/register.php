@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet"  href="css/style1.css">
-    <title>User Management</title>
+    <title>Inscription</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
@@ -32,15 +32,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     
 }   
+
+$conn = new mysqli("localhost", "root", "", "dbfood");
+
+// Vérifiez si la connexion à la base de données a réussi
+if ($conn->connect_error) {
+    die("La connexion à la base de données a échoué: " . $conn->connect_error);
+}
+
+// Préparez la requête SQL pour insérer les données dans la table "users"
+$sql = "INSERT INTO users (login, age, gender, activity_level, password) VALUES (?, ?, ?, ?, ?)";
+
+// Utilisez une déclaration préparée pour éviter les attaques par injection SQL
+$stmt = $conn->prepare($sql);
+
+// Liez les paramètres
+$stmt->bind_param("INT", $login, $age, $gender, $activity_level, $password);
+
+
+// Exécutez la requête
+if ($stmt->execute()) {
+    // Redirigez l'utilisateur vers la page d'accueil après l'inscription
+    header('Location: accueil.php');
+    exit();
+} else {
+    echo "Erreur lors de l'inscription : " . $stmt->error;
+}
+
+// Fermez la déclaration préparée et la connexion à la base de données
+$stmt->close();
+$conn->close();
+
 ?>
 
-<!-- Ajout du paragraphe "Inscrivez-vous" -->
+
+
 <h2 style="text-align: center;">Inscrivez-vous</h2>
 
-<!-- Formulaire d'inscription avec les cases centrées -->
+
 <form method="POST" action="register.php" style="text-align: center;">
     <input type="text" name="login" placeholder="Login" required><br>
-    <input type="password" name="password" placeholder="Mot de passe" required><br> <!-- Champ de mot de passe -->
+    <input type="password" name="password" placeholder="Mot de passe" required><br> 
     <input type="number" name="age" placeholder="Age" required><br>
     <select name="gender">
         <option value="homme">Homme</option>
