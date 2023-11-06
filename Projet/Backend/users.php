@@ -1,146 +1,102 @@
 <?php
-
-require_once('config.php');
-$connectionString = "mysql:host=". _MYSQL_HOST;
-if(defined('_MYSQL_PORT'))
-$connectionString .= ";port=". _MYSQL_PORT;
+require_once 'config.php';
+$connectionString = "mysql:host=" . _MYSQL_HOST;
+if (defined('_MYSQL_PORT')) {
+    $connectionString .= ";port=" . _MYSQL_PORT;
+}
 $connectionString .= ";dbname=" . _MYSQL_DBNAME;
-$options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8' );
-$pdo = NULL;
+$options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
+
 try {
-    $db = new PDO('mysql:host=hostname;dbname=dbfood', 'username', 'password');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur de connexion à la base de données: " . $e->getMessage());
+    $pdo = new PDO($connectionString, _MYSQL_USER, _MYSQL_PASSWORD, $options);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $pdo->query("SELECT id, name, type, calories FROM users"); // Modifier la requête SQL pour inclure la colonne "type" et "calories"
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $erreur) {
+    $response['error'] = 'Erreur : ' . $erreur->getMessage();
+    echo json_encode($response);
+    exit;
 }
 
+// Endpoint pour lister tous les utilisateurs (GET)
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $stmt = $pdo->query("SELECT id, name, type, calories FROM users"); // Modifier la requête SQL pour inclure la colonne "type" et "calories"
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    header('Content-Type: application/json');
+    echo json_encode($users);
+}
+
+// Endpoint pour obtenir un utilisateur par ID (GET)
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $stmt = $pdo->prepare("SELECT id, name, type, calories FROM users WHERE id = ?"); // Modifier la requête SQL pour inclure la colonne "type" et "calories"
+    $stmt->execute([$id]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        header('Content-Type: application/json');
+        echo json_encode($user);
+    } else {
+        http_response_code(404);
+        echo json_encode(["message" => "Utilisateur non trouvé"]);
+    }
+}
+
+// Endpoint pour créer un utilisateur (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Traitement du formulaire d'ajout d'aliment
-    $food_name = $_POST['food_name'];
-    $quantity = $_POST['quantity'];
-    $date_consumed = $_POST['date_consumed'];
+    $data = json_decode(file_get_contents("php://input"), true);
 
-    $stmt = $db->prepare("INSERT INTO food_entries (user_id, food_name, quantity, date_consumed) VALUES (:user_id, :food_name, :quantity, :date_consumed)");
-    $stmt->execute([
-        'user_id' => $_SESSION['user_id'],
-        'food_name' => $food_name,
-        'quantity' => $quantity,
-        'date_consumed' => $date_consumed
-    ]);
+    if (isset($data['name']) && isset($data['type']) && isset($data['calories'])) { // Modifier pour inclure "type" et "calories"
+        $nom = $data['name'];
+        $type = $data['type'];
+        $calories = $data['calories'];
+        $stmt = $pdo->prepare("INSERT INTO users (name, type, calories) VALUES (?, ?, ?)"); // Modifier pour inclure "type" et "calories"
+        $stmt->execute([$name, $type, $calories]);
 
-    // Rediriger l'utilisateur vers la page d'historique des aliments
-    header('Location: food_history.php');
-    exit();
+        header('Content-Type: application/json');
+        http_response_code(201);
+        echo json_encode(["message" => "Utilisateur ajouté avec succès"]);
+    } else {
+        http_response_code(400);
+        echo json_encode(["message" => "Requête invalide"]);
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'PUT' && isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    if (isset($data['name']) && isset($data['type']) && isset($data['calories'])) { // Modifier pour inclure "type" et "calories"
+        $nom = $data['name'];
+        $type = $data['type'];
+        $calories = $data['calories'];
+
+        $stmt = $pdo->prepare("UPDATE users SET name = ?, type = ?, calories = ? WHERE id = ?"); // Modifier pour inclure "type" et "calories"
+        $stmt->execute([$nom, $type, $calories, $id]);
+
+        header('Content-Type: application/json');
+        echo json_encode(["message" => "Utilisateur mis à jour avec succès"]);
+    } else {
+        http_response_code(400);
+        echo json_encode(["message" => "Requête invalide"]);
+    }
+}
+
+// Endpoint pour supprimer un utilisateur par ID (DELETE)
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
+    $stmt->execute([$id]);
+
+    if ($stmt->rowCount() > 0) {
+        header('Content-Type: application/json');
+        http_response_code(204);
+        echo json_encode(["message" => "Utilisateur supprimé avec succès"]);
+    } else {
+        http_response_code(404);
+        echo json_encode(["message" => "Utilisateur non trouvé"]);
+    }
 }
 ?>
-<!-- Formulaire d'ajout d'aliment -->
-<form method="POST" action="create_food.php">
-    <input type="text" name="food_name" placeholder="Nom de l'aliment" required>
-    <input type="number" name="quantity" placeholder="Quantité" step="0.01" required>
-    <input type="date" name="date_consumed" required>
-    <input type="submit" value="Ajouter l'aliment">
-</form>
-
-<?php
-// Connexion à la base de données
-
-// Requête pour récupérer l'historique des aliments consommés par l'utilisateur
-$query = "SELECT * FROM dbfood WHERE user_id = :user_id ORDER BY date_consumed DESC";
-$stmt = $db->prepare($query);
-$stmt->bindParam(':user_id', $_SESSION['user_id']);
-$stmt->execute();
-$food_entries = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
-
-<!-- Affichage de l'historique des aliments consommés -->
-<table>
-    <thead>
-        <tr>
-            <th>col1</th>
-            <th>col2</th>
-            <th>col3</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($food_entries as $entry) : ?>
-            <tr>
-                <td><?= $entry['col1'] ?></td>
-                <td><?= $entry['col2'] ?></td>
-                <td><?= $entry['col3'] ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
-
-
-<?php
-// Connexion à la base de données
-try {
-    $db = new PDO('mysql:host=hostname;dbname=food_tracker', 'username', 'password');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur de connexion à la base de données: " . $e->getMessage());
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $food_id = $_POST['food_id']; // L'ID de l'aliment à mettre à jour
-    $new_quantity = $_POST['new_quantity'];
-
-    // Assurez-vous de valider et de sécuriser les données entrées par l'utilisateur.
-
-    $stmt = $db->prepare("UPDATE food_entries SET quantity = :new_quantity WHERE id = :food_id AND user_id = :user_id");
-    $stmt->execute([
-        'new_quantity' => $new_quantity,
-        'food_id' => $food_id,
-        'user_id' => $_SESSION['user_id']
-    ]);
-
-    // Rediriger l'utilisateur vers la page d'historique des aliments
-    header('Location: food_history.php');
-    exit();
-} else {
-    $food_id = $_GET['id']; // Récupérez l'ID de l'aliment à partir de la requête GET
-}
-?>
-
-<!-- Formulaire de mise à jour d'aliment -->
-<form method="POST" action="update_food.php">
-    <input type="hidden" name="food_id" value="<?= $food_id ?>">
-    <input type="number" name="new_quantity" placeholder="Nouvelle quantité" step="0.01" required>
-    <input type="submit" value="Mettre à jour l'aliment">
-</form>
-
-
-
-<?php
-// Connexion à la base de données
-try {
-    $db = new PDO('mysql:host=hostname;dbname=food_tracker', 'username', 'password');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur de connexion à la base de données: " . $e->getMessage());
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $food_id = $_POST['food_id']; // L'ID de l'aliment à supprimer
-
-    $stmt = $db->prepare("DELETE FROM food_entries WHERE id = :food_id AND user_id = :user_id");
-    $stmt->execute([
-        'food_id' => $food_id,
-        'user_id' => $_SESSION['user_id']
-    ]);
-
-    // Rediriger l'utilisateur vers la page d'historique des aliments
-    header('Location: food_history.php');
-    exit();
-} else {
-    $food_id = $_GET['id']; // Récupérez l'ID de l'aliment à partir de la requête GET
-}
-?>
-
-<!-- Formulaire de suppression d'aliment -->
-<form method="POST" action="delete_food.php">
-    <input type="hidden" name="food_id" value="<?= $food_id ?>">
-    <p>Êtes-vous sûr de vouloir supprimer cet aliment ?</p>
-    <input type="submit" value="Supprimer l'aliment">
-</form>

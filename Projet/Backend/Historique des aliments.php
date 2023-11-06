@@ -14,7 +14,7 @@
     <header>
         <h1>Aliments</h1>
         
- 
+
 
 <!-- Table HTML -->
 <table id="usersTable" class="display">
@@ -22,6 +22,7 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Type</th>
             <th>Calories</th>
             <th>Actions</th>
         </tr>
@@ -33,16 +34,15 @@
 <div id="editModal" style="display:none; position:fixed; top:50%; left:50%; transform: translate(-50%, -50%); background:white; padding:20px;">
     <h2>Edit User</h2>
     <form id="editForm">
-        <input type="hidden" id="usercol1" name="usercol1">
-        Name: <input type="text" id="usercol2" name="usercol2"><br><br>
-        Calories: <input type="text" id="usercol3" name="usercol3"><br><br>
+        <input type="hidden" id="userId" name="userId">
+        Name: <input type="text" id="userName" name="userName"><br><br>
+        Type: <input type="text" id="userType" name="userType"><br><br>
+        Calories: <input type="text" id="userCalories" name="userCalories"><br><br>
         <input type="button" value="Save" onclick="saveEdit()">
         <input type="button" value="Cancel" onclick="closeEdit()">
     </form>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script>
 $(document).ready(function() {
     const table = $('#usersTable').DataTable({
@@ -51,22 +51,24 @@ $(document).ready(function() {
             "dataSrc": ""  // Utilisation de la clé "users" comme source de données
         },
         "columns": [
-            { "data": "col1" },
-            { "data": "col2" },
-            { "data": "col3" },
+            { "data": "id" },
+            { "data": "name" },
+            { "data": "type" }, // Remplace "email" par "type"
+            { "data": "calories" }, // Ajoute la colonne "calories"
             {
                 "data": null,
                 "render": function(data, type, row) {
-                    return `<button onclick="editUser(${data.col1}, '${data.col2}', '${data.col3}')">Edit</button> <button onclick="deleteUser(${data.col1})">Delete</button>`;
+                    return `<button onclick="editUser(${data.id}, '${data.name}', '${data.type}', '${data.calories}')">Edit</button> <button onclick="deleteUser(${data.id})">Delete</button>`;
                 }
             }
         ]
     });
 
-    window.editUser = function(id, name, calories) {
-        document.getElementById("usercol1").value = id;
-        document.getElementById("usercol2").value = name;
-        document.getElementById("usercol3").value = calories;
+    window.editUser = function(id, name, type, calories) {
+        document.getElementById("userId").value = id;
+        document.getElementById("userName").value = name;
+        document.getElementById("userType").value = type;
+        document.getElementById("userCalories").value = calories;
         document.getElementById("editModal").style.display = "block";
     };
 
@@ -90,14 +92,15 @@ $(document).ready(function() {
     };
 
     window.saveEdit = function() {
-        const id = document.getElementById("usercol1").value;
-        const name = document.getElementById("usercol2").value;
-        const calories = document.getElementById("usercol3").value;
+        const id = document.getElementById("userId").value;
+        const name = document.getElementById("userName").value;
+        const type = document.getElementById("userType").value;
+        const calories = document.getElementById("userCalories").value;
 
         $.ajax({
             url: `http://localhost/IDAW/Projet/Backend/users.php?id=${id}`,
             type: 'PUT',
-            data: JSON.stringify({ name: name, calories: calories }),
+            data: JSON.stringify({ name: name, type: type, calories: calories }), // Met à jour les propriétés
             contentType: 'application/json',
             success: function() {
                 table.ajax.reload();
@@ -113,4 +116,3 @@ $(document).ready(function() {
 
 </body>
 </html>
-

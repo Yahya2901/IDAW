@@ -6,7 +6,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Charger le contenu du fichier SQL
-    $sqlFile = 'dbfood.sql'; // Remplacez ceci par le chemin complet vers votre fichier SQL
+    $sqlFile = 'Backend/dbfood.sql'; // Remplacez ceci par le chemin complet vers votre fichier SQL
 
     if (file_exists($sqlFile)) {
         $sqlQueries = file_get_contents($sqlFile);
