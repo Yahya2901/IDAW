@@ -14,8 +14,6 @@
 <body>
     <header>
         <h1>Bienvenue sur iMangerMieux</h1>
-        
-       
     </header>
 
     <nav>
