@@ -47,13 +47,13 @@ $sql = "INSERT INTO users (login, age, gender, activity_level, password) VALUES 
 $stmt = $conn->prepare($sql);
 
 // Liez les paramètres
-$stmt->bind_param("INT", $login, $age, $gender, $activity_level, $password);
+$stmt->bind_param("sisss", $login, $age, $gender, $activity_level, $password);
 
 
 // Exécutez la requête
 if ($stmt->execute()) {
     // Redirigez l'utilisateur vers la page d'accueil après l'inscription
-    header('Location: accueil.php');
+    header('Location: login.php');
     exit();
 } else {
     echo "Erreur lors de l'inscription : " . $stmt->error;
