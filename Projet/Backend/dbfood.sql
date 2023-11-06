@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 06 nov. 2023 à 19:24
+-- Généré le : lun. 06 nov. 2023 à 20:56
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -52,13 +52,13 @@ INSERT INTO `food` (`id`, `name`, `type`, `calories`) VALUES
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  'id' int NOT NULL,
-  `login` varchar(10) NOT NULL,
-  `password` varchar(15) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `login` varchar(20) NOT NULL,
+  `password` varchar(10) NOT NULL,
   `age` int NOT NULL,
   `gender` varchar(10) NOT NULL,
-  `activity_level` varchar(10) NOT NULL,
-  PRIMARY KEY (`login`)
+  `activity_level` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
 COMMIT;
 

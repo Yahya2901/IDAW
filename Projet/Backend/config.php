@@ -4,4 +4,5 @@ define('_MYSQL_PORT',3306);
 define('_MYSQL_DBNAME','dbfood');
 define('_MYSQL_USER','root');
 define('_MYSQL_PASSWORD','');
+
 ?>
