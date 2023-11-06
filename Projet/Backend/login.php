@@ -1,7 +1,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-     
+        <link rel="stylesheet"  href="Frontend/css/style.css">
 <?php
 
 session_start();
@@ -29,10 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Connexion</title>
+    <title>Connexion </title>
 </head>
 <body>
-    <h1>Connexion</h1>
+    <h1>Bienvenue sur iMangerMieux</h1>
     <?php
     if (isset($_SESSION['login_error'])) {
         echo '<p>Identifiants invalides. Veuillez réessayer.</p>';
