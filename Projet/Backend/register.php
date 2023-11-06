@@ -2,7 +2,6 @@
 <html>
 <head>
     <title> iMangerMieux - Tracker d'Aliments et de Calories </title>
-    <meta charset="utf-8" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet"  href="css/style1.css">
@@ -14,9 +13,6 @@
 
 
 <?php
-
-
-
 session_start();
 require_once 'config.php';
 // Vérifier si l'utilisateur est déjà connecté, rediriger s'il est connecté
