@@ -13,7 +13,17 @@
 <body>
     <header>
         <h1>Aliments</h1>
-        
+
+        <nav>
+        <ul>
+            <li><a href="accueil.php">Accueil</a></li>
+            <li><a href="dashboard.php">Dashboard</a></li>
+            <li><a href="Historique des aliments.php">Historique des aliments</a></li>
+            <li><a href="profil.php">Voir mon Profil</a></li>
+            <li><a href="sport.php">Sports</a></li>
+            
+        </ul>
+    </nav>
 
 
 <!-- Table HTML -->

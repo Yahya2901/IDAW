@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nom = $data['name'];
         $type = $data['type'];
         $calories = $data['calories'];
-        $stmt = $pdo->prepare("INSERT INTO users (name, type, calories) VALUES (?, ?, ?)"); // Modifier pour inclure "type" et "calories"
+        $stmt = $pdo->prepare("INSERT INTO users (name, type, calories) VALUES (name, type, calories)"); // Modifier pour inclure "type" et "calories"
         $stmt->execute([$name, $type, $calories]);
 
         header('Content-Type: application/json');
