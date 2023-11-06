@@ -30,7 +30,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $activity_level = $_POST['activity_level'];
     $password = $_POST['password'];
 
-    // Insérez les données de l'utilisateur dans la base de données
+    /// Inclure le fichier de configuration de la base de données ou établir la connexion à la base de données
+// Assurez-vous que cette étape est correctement configurée.
+
+try {
+    // Les informations de connexion à la base de données (à remplacer par les vôtres)
+    $dsn = "mysql:host=localhost;dbname=users.sql";
+    $username = "login";
+    $password = "password";
+
+    // Créer une instance PDO
+    $pdo = new PDO($dsn, $username, $password);
+
+    // Préparer la requête d'insertion avec des paramètres liés
+    $sql = "INSERT INTO table_utilisateurs (login, age, gender, activity_level, password) VALUES (:login, :age, :gender, :activity_level, :password)";
+    $stmt = $pdo->prepare($sql);
+
+    // Lié les paramètres
+    $stmt->bindParam(':login', $login);
+    $stmt->bindParam(':age', $age);
+    $stmt->bindParam(':gender', $gender);
+    $stmt->bindParam(':activity_level', $activity_level);
+    $stmt->bindParam(':password', $password);
+
+    // Récupérer les données du formulaire
+    $login = $_POST['login'];
+    $age = $_POST['age'];
+    $gender = $_POST['gender'];
+    $activity_level = $_POST['activity_level'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hasher le mot de passe
+
+    // Exécuter la requête
+    $stmt->execute();
+
+    // Rediriger l'utilisateur vers la page d'accueil après l'inscription
+    header('Location: Accueil.php');
+    exit();
+} catch (PDOException $e) {
+    // En cas d'erreur de la base de données, afficher un message d'erreur
+    echo "Erreur lors de l'inscription : " . $e->getMessage();
+}
+
     // Assurez-vous d'ajouter une validation et une sécurité appropriées ici
 
     // Après l'inscription, stockez les informations de l'utilisateur dans la session
