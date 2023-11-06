@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 06 nov. 2023 à 17:05
+-- Généré le : lun. 06 nov. 2023 à 19:24
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -43,6 +43,23 @@ CREATE TABLE IF NOT EXISTS `food` (
 INSERT INTO `food` (`id`, `name`, `type`, `calories`) VALUES
 (1, 'Lait', 'Boisson', 300),
 (2, 'Nutella', NULL, 500);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  'id' int NOT NULL,
+  `login` varchar(10) NOT NULL,
+  `password` varchar(15) NOT NULL,
+  `age` int NOT NULL,
+  `gender` varchar(10) NOT NULL,
+  `activity_level` varchar(10) NOT NULL,
+  PRIMARY KEY (`login`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

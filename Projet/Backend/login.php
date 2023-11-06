@@ -1,4 +1,4 @@
-<html lang="en">
+<html>
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet"  href="Frontend/css/style.css">
@@ -8,7 +8,7 @@ session_start();
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
+    $username = $_POST['login'];
     $password = $_POST['password'];
 
     // Vérifier les identifiants de l'utilisateur
@@ -26,9 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
-
-<!DOCTYPE html>
-<html>
 <head>
     <title>Connexion </title>
 </head>
@@ -41,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     ?>
     <form action="login.php" method="POST">
-        <label for="username">login:</label>
+        <label for="login">login:</label>
         <input type="text" name="username" required><br>
         <label for="password">Mot de passe :</label>
         <input type="password" name="password" required><br>

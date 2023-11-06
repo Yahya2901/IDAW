@@ -30,12 +30,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $activity_level = $_POST['activity_level'];
     $password = $_POST['password'];
 
-    /// Inclure le fichier de configuration de la base de données ou établir la connexion à la base de données
-// Assurez-vous que cette étape est correctement configurée.
+
+
+    require_once 'config.php';
+    $connectionString = "mysql:host=" . _MYSQL_HOST;
+    if (defined('_MYSQL_PORT')) {
+        $connectionString .= ";port=" . _MYSQL_PORT;
+    }
+    $connectionString .= ";dbname=" . _MYSQL_DBNAME;
+    $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
+
+    
 
 try {
     // Les informations de connexion à la base de données (à remplacer par les vôtres)
-    $dsn = "mysql:host=localhost;dbname=users.sql";
+    $dsn = "mysql:host=localhost;dbname=dbfood.sql";
     $username = "login";
     $password = "password";
 
