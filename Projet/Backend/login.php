@@ -2,41 +2,48 @@
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet"  href="Frontend/css/style.css">
-<?php
 
+        
+<?php
 session_start();
 
+if (isset($_POST["login"])) {
+    $login = $_POST["login"];
+    $password = $_POST["password"];
+    
+    // Connexion à la base de données
+    require_once "config.php";
+    $conn = new mysqli("localhost", "root", "", "dbfood");
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $login = $_POST['login'];
-    $password = $_POST['password'];
-
-    // Vérifier les identifiants de l'utilisateur
-    if ($login === $_SESSION['login'] && $password === 'password') {
-        // Identifiants valides, connectez l'utilisateur et redirigez vers la page d'accueil
-        $_SESSION['id'] = $id; // Vous pouvez stocker l'ID de l'utilisateur dans la session
-        header('Location: accueil.php');
-        exit;
+    // Vérification des identifiants
+    $sql = "SELECT * FROM users WHERE login = '$login'";
+    $result = mysqli_query($conn, $sql);
+    
+    if ($result) {
+        $user = mysqli_fetch_assoc($result);
+        if ($user && password_verify($password, $user['password'])) {
+            // Les identifiants sont valides, connectez l'utilisateur
+            $_SESSION["login"] = $login;
+            header("Location: accueil.php");
+            exit;
+        } else {
+            // Identifiants invalides, afficher un message d'erreur
+            $_SESSION['login_error'] = 'Identifiants invalides. Veuillez réessayer.';
+            header('Location: login.php');
+            exit;
+        }
     } else {
-        // Identifiants invalides, afficher un message d'erreur
-        $_SESSION['login_error'] = 'Identifiants invalides. Veuillez réessayer.';
-        header('Location: login.php'); // Rediriger vers la page de login
-        exit;
+        // Erreur de requête SQL
+        echo "Erreur de requête SQL : " . mysqli_error($conn);
     }
 }
-
 ?>
+
 <head>
     <title>Connexion </title>
 </head>
 <body>
     <h1>Bienvenue sur iMangerMieux</h1>
-    <?php
-    if (isset($_SESSION['login_error'])) {
-        echo '<p>Identifiants invalides. Veuillez réessayer.</p>';
-        unset($_SESSION['login_error']);
-    }
-    ?>
     <form action="login.php" method="POST">
         <label for="login">login:</label>
         <input type="text" name="login" required><br>
