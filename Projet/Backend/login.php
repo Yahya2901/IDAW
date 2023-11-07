@@ -33,11 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->num_rows === 1) {
         // Récupérez le résultat de la requête
-        $stmt->bind_result($id, $user_login, $user_password);
+        $stmt->bind_result($id, $login, $password);
         $stmt->fetch();
 
         // Vérifiez si le mot de passe correspond
-        if (password_verify($password, $user_password)) {
+        if (password_verify($password, $password)) {
             // Mot de passe valide, connectez l'utilisateur et redirigez-le vers la page d'accueil
             $_SESSION['id'] = $id; // Stockez l'ID de l'utilisateur dans la session
             header('Location: accueil.php');
