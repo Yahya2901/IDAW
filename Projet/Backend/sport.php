@@ -16,8 +16,6 @@
 </head>
 <header>
         <h1>Sports</h1>
-        <br>
-       
     </header>
     <nav>
         <ul>
