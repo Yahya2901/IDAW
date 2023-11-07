@@ -80,6 +80,7 @@ $conn->close();
         <option value="élevé">Élevé</option>
     </select><br>
     <input type="submit" value="S'inscrire">
+    <a href="login.php">Connexion</a>
 </form>
 
 
