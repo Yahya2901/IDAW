@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet"  href="Frontend/css/style.css">
+        <link rel="stylesheet"  href="http://localhost/IDAW/Projet/Frontend/css/style.css">
 <?php
 
 session_start();
