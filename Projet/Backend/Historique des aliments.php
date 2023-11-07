@@ -29,68 +29,102 @@
 <table id="usersTable" class="display">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Calories</th>
+            <th>Code</th>
+            <th>Product Name</th>
+            <th>Nutrition Data Per</th>
+            <th>Energy (kcal)</th>
+            <th>Fat (g)</th>
+            <th>Saturated Fat (g)</th>
+            <th>Carbohydrates (g)</th>
+            <th>Sugars (g)</th>
+            <th>Fiber (g)</th>
+            <th>Proteins (g)</th>
+            <th>Salt (g)</th>
+            <th>Sodium (g)</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody></tbody>
 </table>
 
-<!-- Modal for editing users -->
+<!-- Modal for editing products -->
 <div id="editModal" style="display:none; position:fixed; top:50%; left:50%; transform: translate(-50%, -50%); background:white; padding:20px;">
-    <h2>Edit User</h2>
+    <h2>Edit Product</h2>
     <form id="editForm">
-        <input type="hidden" id="userId" name="userId">
-        Name: <input type="text" id="userName" name="userName"><br><br>
-        Type: <input type="text" id="userType" name="userType"><br><br>
-        Calories: <input type="text" id="userCalories" name="userCalories"><br><br>
+        <input type="hidden" id="productCode" name="productCode">
+        Code: <input type="text" id="productCodeInput" name="productCodeInput"><br><br>
+        Product Name: <input type="text" id="productName" name="productName"><br><br>
+        Nutrition Data Per: <input type="text" id="nutritionDataPer" name="nutritionDataPer"><br><br>
+        Energy (kcal): <input type="text" id="energyKcal" name="energyKcal"><br><br>
+        Fat (g): <input type="text" id="fatValue" name="fatValue"><br><br>
+        Saturated Fat (g): <input type="text" id="saturatedFatValue" name="saturatedFatValue"><br><br>
+        Carbohydrates (g): <input type="text" id="carbohydratesValue" name="carbohydratesValue"><br><br>
+        Sugars (g): <input type="text" id="sugarsValue" name="sugarsValue"><br><br>
+        Fiber (g): <input type="text" id="fiberValue" name="fiberValue"><br><br>
+        Proteins (g): <input type="text" id="proteinsValue" name="proteinsValue"><br><br>
+        Salt (g): <input type="text" id="saltValue" name="saltValue"><br><br>
+        Sodium (g): <input type="text" id="sodiumValue" name="sodiumValue"><br><br>
         <input type="button" value="Save" onclick="saveEdit()">
         <input type="button" value="Cancel" onclick="closeEdit()">
     </form>
 </div>
 
 <script>
-$(document).ready(function() {
+$(document).ready(function()) {
     const table = $('#usersTable').DataTable({
         "ajax": {
             "url": "http://localhost/IDAW/Projet/Backend/users.php",
-            "dataSrc": ""  // Utilisation de la clé "users" comme source de données
+            "dataSrc": ""  // Utilisation de la clé "products" comme source de données
         },
         "columns": [
-            { "data": "id" },
-            { "data": "name" },
-            { "data": "type" }, // Remplace "email" par "type"
-            { "data": "calories" }, // Ajoute la colonne "calories"
+            { "data": "code" },
+            { "data": "product_name_fr" },
+            { "data": "nutrition_data_per" },
+            { "data": "energy_kcal_value_kcal" },
+            { "data": "fat_value_g" },
+            { "data": "saturated_fat_value_g" },
+            { "data": "carbohydrates_value_g" },
+            { "data": "sugars_value_g" },
+            { "data": "fiber_value_g" },
+            { "data": "proteins_value_g" },
+            { "data": "salt_value_g" },
+            { "data": "sodium_value_g" },
             {
                 "data": null,
                 "render": function(data, type, row) {
-                    return `<button onclick="editUser(${data.id}, '${data.name}', '${data.type}', '${data.calories}')">Edit</button> <button onclick="deleteUser(${data.id})">Delete</button>`;
+                    return `<button onclick="editProduct(${data.code}, '${data.product_name_fr}', '${data.nutrition_data_per}', ${data.energy_kcal_value_kcal}, ${data.fat_value_g}, ${data.saturated_fat_value_g}, ${data.carbohydrates_value_g}, ${data.sugars_value_g}, ${data.fiber_value_g}, ${data.proteins_value_g}, ${data.salt_value_g}, ${data.sodium_value_g})">Edit</button> <button onclick="deleteProduct(${data.code})">Delete</button>`;
                 }
             }
         ]
     });
-
-    window.editUser = function(id, name, type, calories) {
-        document.getElementById("userId").value = id;
-        document.getElementById("userName").value = name;
-        document.getElementById("userType").value = type;
-        document.getElementById("userCalories").value = calories;
+}
+    window.editProduct = function(code, product_name_fr, nutrition_data_per, energy_kcal_value_kcal, fat_value_g, saturated_fat_value_g, carbohydrates_value_g, sugars_value_g, fiber_value_g, proteins_value_g, salt_value_g, sodium_value_g) {
+        document.getElementById("productCode").value = code;
+        document.getElementById("productCodeInput").value = code;
+        document.getElementById("productName").value = product_name_fr;
+        document.getElementById("nutritionDataPer").value = nutrition_data_per;
+        document.getElementById("energyKcal").value = energy_kcal_value_kcal;
+        document.getElementById("fatValue").value = fat_value_g;
+        document.getElementById("saturatedFatValue").value = saturated_fat_value_g;
+        document.getElementById("carbohydratesValue").value = carbohydrates_value_g;
+        document.getElementById("sugarsValue").value = sugars_value_g;
+        document.getElementById("fiberValue").value = fiber_value_g;
+        document.getElementById("proteinsValue").value = proteins_value_g;
+        document.getElementById("saltValue").value = salt_value_g;
+        document.getElementById("sodiumValue").value = sodium_value_g;
         document.getElementById("editModal").style.display = "block";
     };
 
-    window.deleteUser = function(id) {
+    window.deleteProduct = function(code) {
         if (confirm("Are you sure?")) {
             $.ajax({
-                url: `http://localhost/IDAW/Projet/Backend/users.php?id=${id}`,
+                url: `http://localhost/IDAW/Projet/Backend/userss.php?code=${code}`,
                 type: 'DELETE',
                 success: function() {
                     table.ajax.reload();
                 },
                 error: function() {
-                    alert('Failed to delete user.');
+                    alert('Failed to delete product.');
                 }
             });
         }
@@ -101,26 +135,18 @@ $(document).ready(function() {
     };
 
     window.saveEdit = function() {
-        const id = document.getElementById("userId").value;
-        const name = document.getElementById("userName").value;
-        const type = document.getElementById("userType").value;
-        const calories = document.getElementById("userCalories").value;
-
-        $.ajax({
-            url: `http://localhost/IDAW/Projet/Backend/users.php?id=${id}`,
-            type: 'PUT',
-            data: JSON.stringify({ name: name, type: type, calories: calories }), // Met à jour les propriétés
-            contentType: 'application/json',
-            success: function() {
-                table.ajax.reload();
-                closeEdit();
-            },
-            error: function() {
-                alert('Failed to update user.');
-            }
-        });
-    };
-});
+        const code = document.getElementById("productCode").value;
+        const product_name_fr = document.getElementById("productName").value;
+        const nutrition_data_per = document.getElementById("nutritionDataPer").value;
+        const energy_kcal_value_kcal = document.getElementById("energyKcal").value;
+        const fat_value_g = document.getElementById("fatValue").value;
+        const saturated_fat_value_g = document.getElementById("saturatedFatValue").value;
+        const carbohydrates_value_g = document.getElementById("carbohydratesValue").value;
+        const sugars_value_g = document.getElementById("sugarsValue").value;
+        const fiber_value_g = document.getElementById("fiberValue").value;
+        const proteins_value_g = document.getElementById("proteinsValue").value;
+        const
+    }
 </script>
 <style>
     body {
