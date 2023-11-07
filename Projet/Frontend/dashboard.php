@@ -12,7 +12,7 @@
 
 <body>
     <header>
-        <h1>Mon Profil</h1>
+        <h1>Dashboard</h1>
     </header>
     <nav>
         <ul>
@@ -24,12 +24,4 @@
             
         </ul>
     </nav>
-    <h1> Vos données de votre sont ci dessous <h1>
-<?php
 
-$login = $_SESSION['login'];
-$password = $_SESSION['password'];
-$age = $_SESSION['age'];
-$gender = $_SESSION['gender'];
-$activity_level = $_SESSION['activity_level'];
-?>
