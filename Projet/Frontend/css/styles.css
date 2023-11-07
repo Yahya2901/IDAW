@@ -1,0 +1,78 @@
+/* Réinitialisation CSS (remise à zéro des styles par défaut des navigateurs) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styles de base pour le corps de la page */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+/* En-tête de page */
+header {
+    background-color: #0077b6;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Barre de navigation (Barre des tâches) */
+.taskbar {
+    background-color: #005f8d;
+    text-align: center;
+}
+
+.taskbar ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.taskbar li {
+    margin: 0 20px;
+}
+
+.taskbar a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.taskbar a:hover {
+    background-color: #0077b6;
+}
+
+/* Contenu principal */
+.content {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Styles spécifiques pour l'image centrée */
+.center-image {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Liens */
+a {
+    color: #0077b6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
