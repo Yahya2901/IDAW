@@ -10,7 +10,7 @@ $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
 try {
     $pdo = new PDO($connectionString, _MYSQL_USER, _MYSQL_PASSWORD, $options);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $pdo->query("SELECT id, name, type, calories FROM users"); // Modifier la requête SQL pour inclure la colonne "type" et "calories"
+    $stmt = $pdo->query("SELECT id, name, type, calories FROM food"); // Modifier la requête SQL pour inclure la colonne "type" et "calories"
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $erreur) {
     $response['error'] = 'Erreur : ' . $erreur->getMessage();
@@ -20,7 +20,7 @@ try {
 
 // Endpoint pour lister tous les utilisateurs (GET)
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $stmt = $pdo->query("SELECT id, name, type, calories FROM users"); // Modifier la requête SQL pour inclure la colonne "type" et "calories"
+    $stmt = $pdo->query("SELECT id, name, type, calories FROM food"); // Modifier la requête SQL pour inclure la colonne "type" et "calories"
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     header('Content-Type: application/json');
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 // Endpoint pour obtenir un utilisateur par ID (GET)
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     $id = $_GET['id'];
-    $stmt = $pdo->prepare("SELECT id, name, type, calories FROM users WHERE id = ?"); // Modifier la requête SQL pour inclure la colonne "type" et "calories"
+    $stmt = $pdo->prepare("SELECT id, name, type, calories FROM food WHERE id = ?"); // Modifier la requête SQL pour inclure la colonne "type" et "calories"
     $stmt->execute([$id]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nom = $data['name'];
         $type = $data['type'];
         $calories = $data['calories'];
-        $stmt = $pdo->prepare("INSERT INTO users (name, type, calories) VALUES (name, type, calories)"); // Modifier pour inclure "type" et "calories"
+        $stmt = $pdo->prepare("INSERT INTO food (name, type, calories) VALUES (name, type, calories)"); // Modifier pour inclure "type" et "calories"
         $stmt->execute([$name, $type, $calories]);
 
         header('Content-Type: application/json');
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT' && isset($_GET['id'])) {
         $type = $data['type'];
         $calories = $data['calories'];
 
-        $stmt = $pdo->prepare("UPDATE users SET name = ?, type = ?, calories = ? WHERE id = ?"); // Modifier pour inclure "type" et "calories"
+        $stmt = $pdo->prepare("UPDATE food SET name = ?, type = ?, calories = ? WHERE id = ?"); // Modifier pour inclure "type" et "calories"
         $stmt->execute([$nom, $type, $calories, $id]);
 
         header('Content-Type: application/json');
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT' && isset($_GET['id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM food WHERE id = ?");
     $stmt->execute([$id]);
 
     if ($stmt->rowCount() > 0) {
