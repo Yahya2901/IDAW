@@ -34,9 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['code'])) {
     $stmt->execute([$code]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($product) {
+    if ($user) {
         header('Content-Type: application/json');
-        echo json_encode($product);
+        echo json_encode($user);
     } else {
         http_response_code(404);
         echo json_encode(["message" => "Produit non trouvé"]);

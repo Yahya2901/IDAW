@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title> iMangerMieux - Tracker d'Aliments et de Calories </title>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  href="styles.css">
+    <title>Les Aliments</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 </head>
-
+<body>
 <body>
     <header>
         <h1>Aliments</h1>
-        <nav>
+    </header>
+    <nav>
         <ul>
             <li><a href="accueil.php">Accueil</a></li>
             <li><a href="http://localhost/IDAW/Projet/Frontend/dashboard.php">Dashboard</a></li>
@@ -23,10 +23,8 @@
             <li><a href="logout.php">Deconnexion</a></li>
         </ul>
     </nav>
-
-
-<!-- Table HTML -->
-<table id="usersTable" class="display">
+<<!-- Table HTML -->
+<table id="productsTable" class="display">
     <thead>
         <tr>
             <th>Code</th>
@@ -52,29 +50,29 @@
     <h2>Edit Product</h2>
     <form id="editForm">
         <input type="hidden" id="productCode" name="productCode">
-        Code: <input type="text" id="productCodeInput" name="productCodeInput"><br><br>
-        Product Name: <input type="text" id="productName" name="productName"><br><br>
-        Nutrition Data Per: <input type="text" id="nutritionDataPer" name="nutritionDataPer"><br><br>
-        Energy (kcal): <input type="text" id="energyKcal" name="energyKcal"><br><br>
-        Fat (g): <input type="text" id="fatValue" name="fatValue"><br><br>
-        Saturated Fat (g): <input type="text" id="saturatedFatValue" name="saturatedFatValue"><br><br>
-        Carbohydrates (g): <input type="text" id="carbohydratesValue" name="carbohydratesValue"><br><br>
-        Sugars (g): <input type="text" id="sugarsValue" name="sugarsValue"><br><br>
-        Fiber (g): <input type="text" id="fiberValue" name="fiberValue"><br><br>
-        Proteins (g): <input type="text" id="proteinsValue" name="proteinsValue"><br><br>
-        Salt (g): <input type="text" id="saltValue" name="saltValue"><br><br>
-        Sodium (g): <input type="text" id="sodiumValue" name="sodiumValue"><br><br>
+        Code: <input type="text" id="productName" name="productName"><br><br>
+        Product Name: <input type="text" id="productProductName" name="productProductName"><br><br>
+        Nutrition Data Per: <input type="text" id="productNutritionDataPer" name="productNutritionDataPer"><br><br>
+        Energy (kcal): <input type="text" id="productEnergyKcal" name="productEnergyKcal"><br><br>
+        Fat (g): <input type="text" id="productFat" name="productFat"><br><br>
+        Saturated Fat (g): <input type="text" id="productSaturatedFat" name="productSaturatedFat"><br><br>
+        Carbohydrates (g): <input type="text" id="productCarbohydrates" name="productCarbohydrates"><br><br>
+        Sugars (g): <input type="text" id="productSugars" name="productSugars"><br><br>
+        Fiber (g): <input type="text" id="productFiber" name="productFiber"><br><br>
+        Proteins (g): <input type="text" id="productProteins" name="productProteins"><br><br>
+        Salt (g): <input type="text" id="productSalt" name="productSalt"><br><br>
+        Sodium (g): <input type="text" id="productSodium" name="productSodium"><br><br>
         <input type="button" value="Save" onclick="saveEdit()">
         <input type="button" value="Cancel" onclick="closeEdit()">
     </form>
 </div>
 
 <script>
-$(document).ready(function()) {
-    const table = $('#usersTable').DataTable({
+$(document).ready(function() {
+    const table = $('#productsTable').DataTable({
         "ajax": {
             "url": "http://localhost/IDAW/Projet/Backend/users.php",
-            "dataSrc": ""  // Utilisation de la clé "products" comme source de données
+            "dataSrc": ""
         },
         "columns": [
             { "data": "code" },
@@ -92,61 +90,93 @@ $(document).ready(function()) {
             {
                 "data": null,
                 "render": function(data, type, row) {
-                    return `<button onclick="editProduct(${data.code}, '${data.product_name_fr}', '${data.nutrition_data_per}', ${data.energy_kcal_value_kcal}, ${data.fat_value_g}, ${data.saturated_fat_value_g}, ${data.carbohydrates_value_g}, ${data.sugars_value_g}, ${data.fiber_value_g}, ${data.proteins_value_g}, ${data.salt_value_g}, ${data.sodium_value_g})">Edit</button> <button onclick="deleteProduct(${data.code})">Delete</button>`;
+                    return `<button onclick="editProduct('${data.code}', '${data.product_name_fr}', '${data.nutrition_data_per}', '${data.energy_kcal_value_kcal}', '${data.fat_value_g}', '${data.saturated_fat_value_g}', '${data.carbohydrates_value_g}', '${data.sugars_value_g}', '${data.fiber_value_g}', '${data.proteins_value_g}', '${data.salt_value_g}', '${data.sodium_value_g}')">Edit</button> <button onclick="deleteProduct('${data.code}')">Delete</button>`;
                 }
             }
         ]
     });
-}
+
     window.editProduct = function(code, product_name_fr, nutrition_data_per, energy_kcal_value_kcal, fat_value_g, saturated_fat_value_g, carbohydrates_value_g, sugars_value_g, fiber_value_g, proteins_value_g, salt_value_g, sodium_value_g) {
         document.getElementById("productCode").value = code;
-        document.getElementById("productCodeInput").value = code;
         document.getElementById("productName").value = product_name_fr;
-        document.getElementById("nutritionDataPer").value = nutrition_data_per;
-        document.getElementById("energyKcal").value = energy_kcal_value_kcal;
-        document.getElementById("fatValue").value = fat_value_g;
-        document.getElementById("saturatedFatValue").value = saturated_fat_value_g;
-        document.getElementById("carbohydratesValue").value = carbohydrates_value_g;
-        document.getElementById("sugarsValue").value = sugars_value_g;
-        document.getElementById("fiberValue").value = fiber_value_g;
-        document.getElementById("proteinsValue").value = proteins_value_g;
-        document.getElementById("saltValue").value = salt_value_g;
-        document.getElementById("sodiumValue").value = sodium_value_g;
+        document.getElementById("productProductName").value = nutrition_data_per;
+        document.getElementById("productEnergyKcal").value = energy_kcal_value_kcal;
+        document.getElementById("productFat").value = fat_value_g;
+        document.getElementById("productSaturatedFat").value = saturated_fat_value_g;
+        document.getElementById("productCarbohydrates").value = carbohydrates_value_g;
+        document.getElementById("productSugars").value = sugars_value_g;
+        document.getElementById("productFiber").value = fiber_value_g;
+        document.getElementById("productProteins").value = proteins_value_g;
+        document.getElementById("productSalt").value = salt_value_g;
+        document.getElementById("productSodium").value = sodium_value_g;
         document.getElementById("editModal").style.display = "block";
     };
 
     window.deleteProduct = function(code) {
-        if (confirm("Are you sure?")) {
-            $.ajax({
-                url: `http://localhost/IDAW/Projet/Backend/userss.php?code=${code}`,
-                type: 'DELETE',
-                success: function() {
-                    table.ajax.reload();
-                },
-                error: function() {
-                    alert('Failed to delete product.');
-                }
-            });
-        }
-    };
-
-    window.closeEdit = function() {
-        document.getElementById("editModal").style.display = "none";
-    };
-
-    window.saveEdit = function() {
-        const code = document.getElementById("productCode").value;
-        const product_name_fr = document.getElementById("productName").value;
-        const nutrition_data_per = document.getElementById("nutritionDataPer").value;
-        const energy_kcal_value_kcal = document.getElementById("energyKcal").value;
-        const fat_value_g = document.getElementById("fatValue").value;
-        const saturated_fat_value_g = document.getElementById("saturatedFatValue").value;
-        const carbohydrates_value_g = document.getElementById("carbohydratesValue").value;
-        const sugars_value_g = document.getElementById("sugarsValue").value;
-        const fiber_value_g = document.getElementById("fiberValue").value;
-        const proteins_value_g = document.getElementById("proteinsValue").value;
-        const
+    if (confirm("Are you sure you want to delete this product?")) {
+        $.ajax({
+            url: `http://localhost/IDAW/Projet/Backend/users.php?code=${code}`,
+            type: 'DELETE',
+            success: function() {
+                table.ajax.reload();
+                closeEdit();
+            },
+            error: function() {
+                alert('Failed to delete product.');
+            }
+        });
     }
+};
+
+window.closeEdit = function() {
+    document.getElementById("editModal").style.display = "none";
+};
+
+window.saveEdit = function() {
+    const code = document.getElementById("productCode").value;
+    const product_name_fr = document.getElementById("productName").value;
+    const nutrition_data_per = document.getElementById("productNutritionDataPer").value;
+    const energy_kcal_value_kcal = document.getElementById("productEnergyKcal").value;
+    const fat_value_g = document.getElementById("productFat").value;
+    const saturated_fat_value_g = document.getElementById("productSaturatedFat").value;
+    const carbohydrates_value_g = document.getElementById("productCarbohydrates").value;
+    const sugars_value_g = document.getElementById("productSugars").value;
+    const fiber_value_g = document.getElementById("productFiber").value;
+    const proteins_value_g = document.getElementById("productProteins").value;
+    const salt_value_g = document.getElementById("productSalt").value;
+    const sodium_value_g = document.getElementById("productSodium").value;
+
+    $.ajax({
+        url: `http://localhost/IDAW/Projet/Backend/users.php?code=${code}`,
+        type: 'PUT',
+        data: JSON.stringify({
+            code: code,
+            product_name_fr: product_name_fr,
+            nutrition_data_per: nutrition_data_per,
+            energy_kcal_value_kcal: energy_kcal_value_kcal,
+            fat_value_g: fat_value_g,
+            saturated_fat_value_g: saturated_fat_value_g,
+            carbohydrates_value_g: carbohydrates_value_g,
+            sugars_value_g: sugars_value_g,
+            fiber_value_g: fiber_value_g,
+            proteins_value_g: proteins_value_g,
+            salt_value_g: salt_value_g,
+            sodium_value_g: sodium_value_g
+        }),
+        contentType: 'application/json',
+        success: function() {
+            table.ajax.reload();
+            closeEdit();
+        },
+        error: function() {
+            alert('Failed to update product.');
+        }
+    });
+};
+
+
+});
+
 </script>
 <style>
     body {
