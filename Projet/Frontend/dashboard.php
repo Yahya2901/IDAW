@@ -72,14 +72,18 @@
             window.editUser = function (id, name, type, calories) {
                 // Update the chart with the selected item's calories
                 updateChart(calories);
-                // Rest of the editUser function
-                // ...
+                document.getElementById("userId").value = id;
+                document.getElementById("userName").value = name;
+                document.getElementById("userType").value = type;
+                document.getElementById("userCalories").value = calories;
+                document.getElementById("editModal").style.display = "block"
             };
 
             // Rest of your JavaScript code
             // ...
         });
     </script>
+?>
 </body>
 </html>
 
