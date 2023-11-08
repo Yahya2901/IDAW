@@ -23,7 +23,9 @@
             <li><a href="logout.php">Deconnexion</a></li>
         </ul>
     </nav>
-<<!-- Table HTML -->
+<h4> Vous trouverez, cher(e) utilisateur(e) la liste globale des aliments que vous pouvez consommer chaque jour. Vous pouvez à tout moment Supprimer 
+    un aliment que vous ne consommez pas ou modifier ses données.</h4>
+<!-- Table HTML -->
 <table id="productsTable" class="display">
     <thead>
         <tr>
@@ -40,6 +42,7 @@
             <th>Salt (g)</th>
             <th>Sodium (g)</th>
             <th>Actions</th>
+
         </tr>
     </thead>
     <tbody></tbody>
