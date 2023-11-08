@@ -27,84 +27,130 @@
         </ul>
     </nav>
 <body>
-    <!-- Table HTML -->
-    <table id="usersTable" class="display">
-        <!-- Table content here -->
-    </table>
+<div style="text-align: center;">
+<h4> Dans notre tableau de bord interactif, vous trouverez une représentation visuelle unique de votre consommation calorique. Notre tableau de bord circulaire (AU DESSOUS DU TABLEAU) innovant commence vide, mais dès que vous sélectionnez un aliment, il se remplit progressivement de calories pour vous permettre de suivre facilement votre apport quotidien. Chaque aliment que vous ajoutez contribue à colorer ce graphique, vous donnant un aperçu instantané de votre consommation. Notre design convivial et intuitif rend la gestion de votre régime alimentaire aussi simple que de cliquer sur vos choix préférés. Surveillez votre progression en temps réel et maintenez le contrôle total de votre nutrition grâce à notre tableau de bord interactif sur mesure.</h4>
+</div>
+<!-- Table HTML -->
+<table id="productsTable" class="display">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Product Name</th>
+            <th>Nutrition Data Per</th>
+            <th>Energy (kcal)</th>
+            <th>Fat (g)</th>
+            <th>Saturated Fat (g)</th>
+            <th>Carbohydrates (g)</th>
+            <th>Sugars (g)</th>
+            <th>Fiber (g)</th>
+            <th>Proteins (g)</th>
+            <th>Salt (g)</th>
+            <th>Sodium (g)</th>
+            <th>Ajouter</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
 
-    <!-- Chart.js canvas for the circular chart -->
-    <div style="text-align: center;">
-        <canvas id="caloriesChart" width="100" height="100"></canvas>
-    </div>
+<!-- Modal for editing products -->
+<div id="editModal" style="display:none; position:fixed; top:50%; left:50%; transform: translate(-50%, -50%); background:white; padding:20px;">
+    <h2>Edit Product</h2>
+    <form id="editForm">
+        <input type="hidden" id="productCode" name="productCode">
+        Code: <input type="text" id="productName" name="productName"><br><br>
+        Product Name: <input type="text" id="productProductName" name="productProductName"><br><br>
+        Nutrition Data Per: <input type="text" id="productNutritionDataPer" name="productNutritionDataPer"><br><br>
+        Energy (kcal): <input type="text" id="productEnergyKcal" name="productEnergyKcal"><br><br>
+        Fat (g): <input type="text" id="productFat" name="productFat"><br><br>
+        Saturated Fat (g): <input type="text" id="productSaturatedFat" name="productSaturatedFat"><br><br>
+        Carbohydrates (g): <input type="text" id="productCarbohydrates" name="productCarbohydrates"><br><br>
+        Sugars (g): <input type="text" id="productSugars" name="productSugars"><br><br>
+        Fiber (g): <input type="text" id="productFiber" name="productFiber"><br><br>
+        Proteins (g): <input type="text" id="productProteins" name="productProteins"><br><br>
+        Salt (g): <input type="text" id="productSalt" name="productSalt"><br><br>
+        Sodium (g): <input type="text" id="productSodium" name="productSodium"><br><br>
+        <input type="button" value="Save" onclick="saveEdit()">
+        <input type="button" value="Cancel" onclick="closeEdit()">
+    </form>
+</div>
 
-    <script>
-    $(document).ready(function () {
-        // Initialize Chart.js
-        var ctx = document.getElementById('caloriesChart').getContext('2d');
-        var chart = new Chart(ctx, {
-            type: 'doughnut', // Circular chart type
-            data: {
-                labels: ['Calories Consommées', 'Calories Restantes'],
-                datasets: [
-                    {
-                        data: [0, 2000], // Initial values, replace with your total calories
-                        backgroundColor: ['#FF5733', '#3333FF'], // Colors for the chart segments
-                    },
-                ],
-            },
-        });
+<!-- Chart.js canvas for the circular chart -->
+<div style="text-align: center;">
+    <canvas id="caloriesChart" width="100" height="100"></canvas>
+</div>
 
-        const table = $('#usersTable').DataTable({
-            "ajax": {
-                "url": "http://localhost/IDAW/Projet/Backend/users.php",
-                "dataSrc": "" // Utilisation de la clé "users" comme source de données
-            },
-            "columns": [
-                // Columns configuration here
-                { data: 'code' }, // Ajoutez les nouvelles colonnes ici
-                { data: 'product_name_fr' },
-                { data: 'nutrition_data_per' },
-                { data: 'energy_kcal_value_kcal' },
-                { data: 'fat_value_g' },
-                { data: 'saturated_fat_value_g' },
-                { data: 'carbohydrates_value_g' },
-                { data: 'sugars_value_g' },
-                { data: 'fiber_value_g' },
-                { data: 'proteins_value_g' },
-                { data: 'salt_value_g' },
-                { data: 'sodium_value_g' },
+<script>
+var chart;
+
+$(document).ready(function () {
+    // Initialize Chart.js
+    var ctx = document.getElementById('caloriesChart').getContext('2d');
+    chart = new Chart(ctx, {
+        type: 'doughnut', // Circular chart type
+        data: {
+            labels: ['Calories Consommées', 'Calories Restantes'],
+            datasets: [
+                {
+                    data: [0, 2000], // Initial values, replace with your total calories
+                    backgroundColor: ['#FF5733', '#3333FF'], // Colors for the chart segments
+                },
             ],
-        });
-
-        // Function to update the chart when an item is selected
-        function updateChart(energyKcal) {
-            // Update the data for the chart
-            chart.data.datasets[0].data = [energy_kcal_value_kcal, 2000 - energy_kcal_value_kcal]; // Update with your total calories
-            chart.update();
-        }
-
-        window.editUser = function (code, product_name_fr, nutrition_data_per, energy_kcal_value_kcal, fat_value_g, saturated_fat_value_g, carbohydrates_value_g, sugars_value_g, fiber_value_g, proteins_value_g, salt_value_g, sodium_value_g) {
-            // Update the chart with the selected item's energy_kcal_value_kcal
-            updateChart(energy_kcal_value_kcal);
-            document.getElementById("code").value = code;
-            document.getElementById("product_name_fr").value = product_name_fr;
-            document.getElementById("nutrition_data_per").value = nutrition_data_per;
-            document.getElementById("energy_kcal_value_kcal").value = energy_kcal_value_kcal;
-            document.getElementById("fat_value_g").value = fat_value_g;
-            document.getElementById("saturated_fat_value_g").value = saturated_fat_value_g;
-            document.getElementById("carbohydrates_value_g").value = carbohydrates_value_g;
-            document.getElementById("sugars_value_g").value = sugars_value_g;
-            document.getElementById("fiber_value_g").value = fiber_value_g;
-            document.getElementById("proteins_value_g").value = proteins_value_g;
-            document.getElementById("salt_value_g").value = salt_value_g;
-            document.getElementById("sodium_value_g").value = sodium_value_g;
-            document.getElementById("editModal").style.display = "block";
-        };
-
-        // Rest of your JavaScript code
-        // ...
+        },
     });
+
+    // Configuration DataTable
+    const table = $('#productsTable').DataTable({
+        "ajax": {
+            "url": "http://localhost/IDAW/Projet/Backend/users.php",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "code" },
+            { "data": "product_name_fr" },
+            { "data": "nutrition_data_per" },
+            { "data": "energy_kcal_value_kcal" },
+            { "data": "fat_value_g" },
+            { "data": "saturated_fat_value_g" },
+            { "data": "carbohydrates_value_g" },
+            { "data": "sugars_value_g" },
+            { "data": "fiber_value_g" },
+            { "data": "proteins_value_g" },
+            { "data": "salt_value_g" },
+            { "data": "sodium_value_g" },
+            {
+                "data": null,
+                "render": function (data, type, row) {
+                    return `<button onclick="addCalories(${data.energy_kcal_value_kcal})">Ajouter</button>`;
+                }
+            }
+        ]
+    });
+
+    // Fonction pour ajouter des calories au graphique circulaire
+function addCaloriesToChart(calories) {
+    // Récupérez la valeur actuelle des calories consommées
+    const currentCaloriesConsumed = chart.data.datasets[0].data[0];
+
+    // Ajoutez les nouvelles calories
+    const newCaloriesConsumed = currentCaloriesConsumed + calories;
+
+    // Mettez à jour le graphique circulaire
+    updateChart(newCaloriesConsumed);
+}
+
+function addCalories(energy_kcal_value_kcal) {
+    addCaloriesToChart(energy_kcal_value_kcal); // Passer energy_kcal_value_kcal en argument
+}
+
+});
 </script>
+
+
+
+
+
+
+
 
 <style>
     body {
