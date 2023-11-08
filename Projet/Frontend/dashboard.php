@@ -38,41 +38,11 @@
             <th>Product Name</th>
             <th>Nutrition Data Per</th>
             <th>Energy (kcal)</th>
-            <th>Fat (g)</th>
-            <th>Saturated Fat (g)</th>
-            <th>Carbohydrates (g)</th>
-            <th>Sugars (g)</th>
-            <th>Fiber (g)</th>
-            <th>Proteins (g)</th>
-            <th>Salt (g)</th>
-            <th>Sodium (g)</th>
             <th>Ajouter</th>
         </tr>
     </thead>
     <tbody></tbody>
 </table>
-
-<!-- Modal for editing products -->
-<div id="editModal" style="display:none; position:fixed; top:50%; left:50%; transform: translate(-50%, -50%); background:white; padding:20px;">
-    <h2>Edit Product</h2>
-    <form id="editForm">
-        <input type="hidden" id="productCode" name="productCode">
-        Code: <input type="text" id="productName" name="productName"><br><br>
-        Product Name: <input type="text" id="productProductName" name="productProductName"><br><br>
-        Nutrition Data Per: <input type="text" id="productNutritionDataPer" name="productNutritionDataPer"><br><br>
-        Energy (kcal): <input type="text" id="productEnergyKcal" name="productEnergyKcal"><br><br>
-        Fat (g): <input type="text" id="productFat" name="productFat"><br><br>
-        Saturated Fat (g): <input type="text" id="productSaturatedFat" name="productSaturatedFat"><br><br>
-        Carbohydrates (g): <input type="text" id="productCarbohydrates" name="productCarbohydrates"><br><br>
-        Sugars (g): <input type="text" id="productSugars" name="productSugars"><br><br>
-        Fiber (g): <input type="text" id="productFiber" name="productFiber"><br><br>
-        Proteins (g): <input type="text" id="productProteins" name="productProteins"><br><br>
-        Salt (g): <input type="text" id="productSalt" name="productSalt"><br><br>
-        Sodium (g): <input type="text" id="productSodium" name="productSodium"><br><br>
-        <input type="button" value="Save" onclick="saveEdit()">
-        <input type="button" value="Cancel" onclick="closeEdit()">
-    </form>
-</div>
 
 <!-- Chart.js canvas for the circular chart -->
 <div style="text-align: center;">
@@ -109,14 +79,6 @@ $(document).ready(function () {
             { "data": "product_name_fr" },
             { "data": "nutrition_data_per" },
             { "data": "energy_kcal_value_kcal" },
-            { "data": "fat_value_g" },
-            { "data": "saturated_fat_value_g" },
-            { "data": "carbohydrates_value_g" },
-            { "data": "sugars_value_g" },
-            { "data": "fiber_value_g" },
-            { "data": "proteins_value_g" },
-            { "data": "salt_value_g" },
-            { "data": "sodium_value_g" },
             {
                 "data": null,
                 "render": function (data, type, row) {
@@ -137,22 +99,19 @@ $(document).ready(function () {
         updateChart(newCaloriesConsumed);
     }
 
-    // Function to update the chart when an item is selected
-    function updateChart(energy_kcal) {
+    // Function to update the chart
+    function updateChart(energyKcal) {
         // Update the data for the chart
-        chart.data.datasets[0].data = [energy_kcal, 2000 - energy_kcal]; // Update with your total calories
+        chart.data.datasets[0].data = [energyKcal, 2000 - energyKcal]; // Update with your total calories
         chart.update();
     }
 
     function addCalories(energy_kcal_value_kcal) {
-    addCaloriesToChart(energy_kcal_value_kcal);
-}
+        addCaloriesToChart(energy_kcal_value_kcal);
+    }
 
 });
 </script>
-
-
-
 
 
 
