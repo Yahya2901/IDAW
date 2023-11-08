@@ -8,6 +8,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 </head>
 <body>
     <header>
@@ -36,53 +39,73 @@
     </div>
 
     <script>
-        $(document).ready(function () {
-            // Initialize Chart.js
-            var ctx = document.getElementById('caloriesChart').getContext('2d');
-            var chart = new Chart(ctx, {
-                type: 'doughnut', // Circular chart type
-                data: {
-                    labels: ['Calories Consommées', 'Calories Restantes'],
-                    datasets: [
-                        {
-                            data: [0, 2000], // Initial values, replace with your total calories
-                            backgroundColor: ['#FF5733', '#3333FF'], // Colors for the chart segments
-                        },
-                    ],
-                },
-            });
-
-            const table = $('#usersTable').DataTable({
-                "ajax": {
-                    "url": "http://localhost/IDAW/Projet/Backend/users.php",
-                    "dataSrc": "" // Utilisation de la clé "users" comme source de données
-                },
-                "columns": [
-                    // Columns configuration here
+    $(document).ready(function () {
+        // Initialize Chart.js
+        var ctx = document.getElementById('caloriesChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'doughnut', // Circular chart type
+            data: {
+                labels: ['Calories Consommées', 'Calories Restantes'],
+                datasets: [
+                    {
+                        data: [0, 2000], // Initial values, replace with your total calories
+                        backgroundColor: ['#FF5733', '#3333FF'], // Colors for the chart segments
+                    },
                 ],
-            });
-
-            // Function to update the chart when an item is selected
-            function updateChart(caloriesConsumed) {
-                // Update the data for the chart
-                chart.data.datasets[0].data = [caloriesConsumed, 2000 - caloriesConsumed]; // Update with your total calories
-                chart.update();
-            }
-
-            window.editUser = function (id, name, type, calories) {
-                // Update the chart with the selected item's calories
-                updateChart(calories);
-                document.getElementById("userId").value = id;
-                document.getElementById("userName").value = name;
-                document.getElementById("userType").value = type;
-                document.getElementById("userCalories").value = calories;
-                document.getElementById("editModal").style.display = "block"
-            };
-
-            // Rest of your JavaScript code
-            // ...
+            },
         });
-    </script>
+
+        const table = $('#usersTable').DataTable({
+            "ajax": {
+                "url": "http://localhost/IDAW/Projet/Backend/users.php",
+                "dataSrc": "" // Utilisation de la clé "users" comme source de données
+            },
+            "columns": [
+                // Columns configuration here
+                { data: 'code' }, // Ajoutez les nouvelles colonnes ici
+                { data: 'product_name_fr' },
+                { data: 'nutrition_data_per' },
+                { data: 'energy_kcal_value_kcal' },
+                { data: 'fat_value_g' },
+                { data: 'saturated_fat_value_g' },
+                { data: 'carbohydrates_value_g' },
+                { data: 'sugars_value_g' },
+                { data: 'fiber_value_g' },
+                { data: 'proteins_value_g' },
+                { data: 'salt_value_g' },
+                { data: 'sodium_value_g' },
+            ],
+        });
+
+        // Function to update the chart when an item is selected
+        function updateChart(energyKcal) {
+            // Update the data for the chart
+            chart.data.datasets[0].data = [energy_kcal_value_kcal, 2000 - energy_kcal_value_kcal]; // Update with your total calories
+            chart.update();
+        }
+
+        window.editUser = function (code, product_name_fr, nutrition_data_per, energy_kcal_value_kcal, fat_value_g, saturated_fat_value_g, carbohydrates_value_g, sugars_value_g, fiber_value_g, proteins_value_g, salt_value_g, sodium_value_g) {
+            // Update the chart with the selected item's energy_kcal_value_kcal
+            updateChart(energy_kcal_value_kcal);
+            document.getElementById("code").value = code;
+            document.getElementById("product_name_fr").value = product_name_fr;
+            document.getElementById("nutrition_data_per").value = nutrition_data_per;
+            document.getElementById("energy_kcal_value_kcal").value = energy_kcal_value_kcal;
+            document.getElementById("fat_value_g").value = fat_value_g;
+            document.getElementById("saturated_fat_value_g").value = saturated_fat_value_g;
+            document.getElementById("carbohydrates_value_g").value = carbohydrates_value_g;
+            document.getElementById("sugars_value_g").value = sugars_value_g;
+            document.getElementById("fiber_value_g").value = fiber_value_g;
+            document.getElementById("proteins_value_g").value = proteins_value_g;
+            document.getElementById("salt_value_g").value = salt_value_g;
+            document.getElementById("sodium_value_g").value = sodium_value_g;
+            document.getElementById("editModal").style.display = "block";
+        };
+
+        // Rest of your JavaScript code
+        // ...
+    });
+</script>
 
 <style>
     body {

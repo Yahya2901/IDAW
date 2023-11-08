@@ -93,6 +93,7 @@ $(document).ready(function() {
                     return `<button onclick="editProduct('${data.code}', '${data.product_name_fr}', '${data.nutrition_data_per}', '${data.energy_kcal_value_kcal}', '${data.fat_value_g}', '${data.saturated_fat_value_g}', '${data.carbohydrates_value_g}', '${data.sugars_value_g}', '${data.fiber_value_g}', '${data.proteins_value_g}', '${data.salt_value_g}', '${data.sodium_value_g}')">Edit</button> <button onclick="deleteProduct('${data.code}')">Delete</button>`;
                 }
             }
+
         ]
     });
 
