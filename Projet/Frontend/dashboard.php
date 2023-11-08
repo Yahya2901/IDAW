@@ -27,7 +27,6 @@
         </ul>
     </nav>
 <body>
-
     <!-- Table HTML -->
     <table id="usersTable" class="display">
         <!-- Table content here -->

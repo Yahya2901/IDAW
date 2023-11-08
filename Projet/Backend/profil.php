@@ -24,7 +24,7 @@
             <li><a href="logout.php">Deconnexion</a></li>
         </ul>
     </nav>
-    <h1> Vos données de votre sont ci dessous <h1>
+    <h1> Vos données de votre profil sont ci dessous <h1>
 <?php
 
 $login = $_SESSION['login'];
