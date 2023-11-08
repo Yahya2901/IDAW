@@ -126,20 +126,26 @@ $(document).ready(function () {
         ]
     });
 
-    // Fonction pour ajouter des calories au graphique circulaire
-function addCaloriesToChart(calories) {
-    // Récupérez la valeur actuelle des calories consommées
-    const currentCaloriesConsumed = chart.data.datasets[0].data[0];
+    function addCaloriesToChart(calories) {
+        // Récupérez la valeur actuelle des calories consommées
+        const currentCaloriesConsumed = chart.data.datasets[0].data[0];
 
-    // Ajoutez les nouvelles calories
-    const newCaloriesConsumed = currentCaloriesConsumed + calories;
+        // Ajoutez les nouvelles calories
+        const newCaloriesConsumed = currentCaloriesConsumed + calories;
 
-    // Mettez à jour le graphique circulaire
-    updateChart(newCaloriesConsumed);
-}
+        // Mettez à jour le graphique circulaire
+        updateChart(newCaloriesConsumed);
+    }
 
-function addCalories(energy_kcal_value_kcal) {
-    addCaloriesToChart(energy_kcal_value_kcal); // Passer energy_kcal_value_kcal en argument
+    // Function to update the chart when an item is selected
+    function updateChart(energy_kcal) {
+        // Update the data for the chart
+        chart.data.datasets[0].data = [energy_kcal, 2000 - energy_kcal]; // Update with your total calories
+        chart.update();
+    }
+
+    function addCalories(energy_kcal_value_kcal) {
+    addCaloriesToChart(energy_kcal_value_kcal);
 }
 
 });
