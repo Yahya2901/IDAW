@@ -11,78 +11,92 @@
 
 
 <?php
-session_start();
-require_once 'config.php';
-// Vérifier si l'utilisateur est déjà connecté, rediriger s'il est connecté
-if (isset($_SESSION['id'])) {
-    header('Location: accueil.php');
-    exit();
-}
-
 // Connexion à la base de données
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Traitement du formulaire d'inscription
-    $login = $_POST['login'];
-    $age = $_POST['age'];
-    $gender = $_POST['gender'];
-    $activity_level = $_POST['activity_level'];
-    $password = $_POST['password'];
-    
-}   
+require_once 'config.php';
 
 $conn = new mysqli("localhost", "root", "", "dbfood");
 
-// Vérifiez si la connexion à la base de données a réussi
+// Vérifier la connexion
 if ($conn->connect_error) {
-    die("La connexion à la base de données a échoué: " . $conn->connect_error);
+    die("La connexion a échoué : " . $conn->connect_error);
 }
 
-// Préparez la requête SQL pour insérer les données dans la table "users"
-$sql = "INSERT INTO users (login, age, gender, activity_level, password) VALUES (?, ?, ?, ?, ?)";
+// Traitement du formulaire d'inscription
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupération des données du formulaire
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $confirm_password = $_POST["confirm_password"];
+    $age = $_POST["age"];
+    $gender = $_POST["gender"];
+    $activity_level = $_POST["activity_level"];
+    $height = $_POST["height"];
+    $weight = $_POST["weight"];
 
-// Utilisez une déclaration préparée pour éviter les attaques par injection SQL
-$stmt = $conn->prepare($sql);
+    // Vérifier si les mots de passe correspondent
+    if ($password != $confirm_password) {
+        echo "Les mots de passe ne correspondent pas.";
+    } else {
+        // Hasher le mot de passe
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-// Liez les paramètres
-$stmt->bind_param("sisss", $login, $age, $gender, $activity_level, $password);
+        // Insérer les données dans la table "users"
+        $sql = "INSERT INTO users (email, password, age, gender, activity_level, height, weight) VALUES ('$email', '$hashed_password', $age, '$gender', '$activity_level', $height, $weight)";
 
-
-// Exécutez la requête
-if ($stmt->execute()) {
-    // Redirigez l'utilisateur vers la page d'accueil après l'inscription
-    header('Location: login.php');
-    exit();
+        if ($conn->query($sql) === TRUE) {
+            echo "Inscription réussie !";
+        } else {
+            echo "Erreur lors de l'inscription : " . $conn->error;
+        }
+    }
 }
 
-// Fermez la déclaration préparée et la connexion à la base de données
-$stmt->close();
+// Fermer la connexion à la base de données
 $conn->close();
-
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscrivez-vous</title>
+</head>
+<body>
+    <h2>Inscription</h2>
+    <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+        <label>Email:</label>
+        <input type="email" name="email" required><br>
 
+        <label>Mot de passe:</label>
+        <input type="password" name="password" required><br>
 
-<h2 style="text-align: center;">Inscrivez-vous</h2>
+        <label>Confirmer le mot de passe:</label>
+        <input type="password" name="confirm_password" required><br>
 
+        <label>Âge:</label>
+        <input type="number" name="age" required><br>
 
-<form method="POST" action="register.php" style="text-align: center;">
-    <input type="text" name="login" placeholder="Login" required><br>
-    <input type="password" name="password" placeholder="Mot de passe" required><br> 
-    <input type="number" name="age" placeholder="Age" required><br>
-    <select name="gender">
-        <option value="homme">Homme</option>
-        <option value="femme">Femme</option>
-    </select><br>
-    <select name="activity_level">
-        <option value="bas">Bas</option>
-        <option value="moyen">Moyen</option>
-        <option value="élevé">Élevé</option>
-    </select><br>
-    <input type="submit" value="S'inscrire">
-    <a href="login.php">Connexion</a>
-</form>
+        <label>Sexe:</label>
+        <select name="gender" required>
+            <option value="male">Homme</option>
+            <option value="female">Femme</option>
+        </select><br>
 
+        <label>Niveau d'activité:</label>
+        <select name="activity_level" required>
+            <option value="low">Faible</option>
+            <option value="moderate">Modéré</option>
+            <option value="high">Élevé</option>
+        </select><br>
 
+        <label>Taille (cm):</label>
+        <input type="number" name="height" required><br>
 
+        <label>Poids (kg):</label>
+        <input type="number" name="weight" required><br>
 
+        <input type="submit" value="S'inscrire">
+    </form>
+</body>
+</html>

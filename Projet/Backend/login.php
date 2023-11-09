@@ -8,24 +8,62 @@
 
 session_start();
 require_once 'config.php';
-
+$connection = new mysqli("localhost", "root", "", "dbfood");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['login'];
+    $login = $_POST['login'];
     $password = $_POST['password'];
 
-    // Vérifier les identifiants de l'utilisateur
-    if ($username === $_SESSION['user_login'] && $password === 'password') {
-        // Identifiants valides, connectez l'utilisateur et redirigez vers la page d'accueil
-        $_SESSION['user_id'] = $user_id; // Vous pouvez stocker l'ID de l'utilisateur dans la session
-        header('Location: accueil.php');
-        exit;
-    } else {
-        // Identifiants invalides, afficher un message d'erreur
-        $_SESSION['login_error'] = 'Identifiants invalides. Veuillez réessayer.';
-        header('Location: login.php'); // Rediriger vers la page de login
-        exit;
+    if (empty($login) && empty($password)) {
+        // Prépare une déclaration select
+        $sql = "SELECT id, login, password,  FROM users WHERE login = ?";
+
+        if ($stmt = $connection->prepare($sql)) {
+            // Lie les variables à la déclaration préparée en tant que paramètres
+            $stmt->bind_param("s", $login);
+
+            // Définir les paramètres
+            $login = $login;
+
+            // Tentative d'exécution de la déclaration préparée
+            if ($stmt->execute()) {
+                // Stocke le résultat
+                $stmt->store_result();
+
+                // Vérifie si l'email existe, si oui, vérifie le mot de passe
+                if ($stmt->num_rows == 1) {
+                    // Lie les variables de résultat
+                    $stmt->bind_result($id, $login, $hashed_password);
+                    if ($stmt->fetch()) {
+                        if (password_verify($password, $hashed_password)) {
+                            // Le mot de passe est correct, commence une nouvelle session
+                            session_start();
+
+                            // Stocke les données dans les variables de session
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["id"] = $id;
+                            $_SESSION["login"] = $login;
+                            
+
+                            // Redirige l'utilisateur vers la page d'accueil
+                            header("location: accueil.php");
+                        } else {
+                            // Affiche un message d'erreur si le mot de passe n'est pas valide
+                            $password_err = "Le mot de passe que vous avez entré n'est pas valide.";
+                        }
+                    }
+                } else {
+                    // Affiche un message d'erreur si l'email n'existe pas
+                    $login_err = "Aucun compte trouvé avec cet email.";
+                }
+            } else {
+                echo "Oups ! Quelque chose s'est mal passé. Veuillez réessayer plus tard.";
+            }
+
+            // Ferme la déclaration
+            $stmt->close();
+        }
     }
-}
+}    
 
 ?>
 <head>

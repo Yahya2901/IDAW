@@ -25,14 +25,35 @@
         </ul>
     </nav>
     <h1> Vos données de votre profil sont ci dessous <h1>
-<?php
 
+<?php
+session_start();
+
+// Récupérer les données de l'utilisateur depuis la session ou la base de données
 $login = $_SESSION['login'];
-$password = $_SESSION['password'];
 $age = $_SESSION['age'];
 $gender = $_SESSION['gender'];
 $activity_level = $_SESSION['activity_level'];
+
+// Afficher les données dans la page
 ?>
+    <p>Login: <?php echo $login; ?></p>
+    <p>Age: <?php echo $age; ?></p>
+    <p>Genre: <?php echo $gender; ?></p>
+    <p>Niveau d'activité: <?php echo $activity_level; ?></p>
+    <!-- Ajoutez d'autres informations selon vos besoins -->
+
+</html>
+
+
+
+
+
+
+
+
+
+
 <style>
     body {
     font-family: 'Arial', sans-serif;
