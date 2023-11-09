@@ -97,6 +97,8 @@ $conn->close();
         <input type="number" name="weight" required><br>
 
         <input type="submit" value="S'inscrire">
+        <a href="login.php">Connectez vous</a></p>
+
     </form>
 </body>
 </html>
