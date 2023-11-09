@@ -45,7 +45,7 @@
     </table>
 
     <!-- Chart Container -->
-    <div style="width: 500px; height: 500px; margin: 0 auto; text-align: center;">
+    <div style="width: 600px; height: 600px; margin: 0 auto; text-align: center;">
     <canvas id="caloriesChart"></canvas>
 </div>
 
@@ -60,12 +60,14 @@
             data: {
                 labels: ['Consumed Calories', 'Remaining Calories'],
                 datasets: [{
-                    data: [totalCalories, 2000 - totalCalories], // 2000 is the total allowed calories
+                    data: [totalCalories, 3000 - totalCalories], // 2000 is the total allowed calories
                     backgroundColor: ['#36a2eb', '#ff6384'],
                 }]
             }
         });
-
+        
+    
+    
         // Configuration DataTable
         const table = $('#productsTable').DataTable({
             "ajax": {
@@ -77,6 +79,7 @@
                 { "data": "product_name_fr" },
                 { "data": "nutrition_data_per" },
                 { "data": "energy_kcal_value_kcal" },
+                
                 {
                     "data": null,
                     "render": function (data, type, row) {
@@ -88,7 +91,7 @@
 
         // Function to update the chart
         function updateChart() {
-            caloriesChart.data.datasets[0].data = [totalCalories, 2000 - totalCalories];
+            caloriesChart.data.datasets[0].data = [totalCalories, 3000 - totalCalories];
             caloriesChart.update();
         }
 
