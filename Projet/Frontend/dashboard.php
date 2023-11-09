@@ -21,7 +21,6 @@
             <li><a href="http://localhost/IDAW/Projet/Backend/accueil.php">Accueil</a></li>
             <li><a href="http://localhost/IDAW/Projet/Frontend/dashboard.php">Dashboard</a></li>
             <li><a href="http://localhost/IDAW/Projet/Backend/Historique des aliments.php">Historique des aliments</a></li>
-            <li><a href="http://localhost/IDAW/Projet/Backend/profil.php">Voir mon Profil</a></li>
             <li><a href="http://localhost/IDAW/Projet/Backend/sport.php">Sports</a></li>
             <li><a href="http://localhost/IDAW/Projet/Backend/logout.php">Deconnexion</a></li>
         </ul>

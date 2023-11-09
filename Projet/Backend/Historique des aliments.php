@@ -18,7 +18,6 @@
             <li><a href="accueil.php">Accueil</a></li>
             <li><a href="http://localhost/IDAW/Projet/Frontend/dashboard.php">Dashboard</a></li>
             <li><a href="Historique des aliments.php">Historique des aliments</a></li>
-            <li><a href="profil.php">Voir mon Profil</a></li>
             <li><a href="sport.php">Sports</a></li>
             <li><a href="logout.php">Deconnexion</a></li>
         </ul>
