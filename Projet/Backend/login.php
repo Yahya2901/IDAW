@@ -6,17 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
         <link rel="stylesheet"  href="http://localhost/IDAW/Projet/Frontend/css/style.css">
-<?php
-
-
+        <?php
+// Connexion à la base de données
 require_once 'config.php';
-$connection = new mysqli("localhost", "root", "", "dbfood");
-// Vérifier la connexion
-if (empty($email_err) && empty($password_err)) {
-    // Prépare une déclaration select
-    $sql = "SELECT id, email, password, FROM users WHERE email = ?";
 
-    if ($stmt = $connection->prepare($sql)) {
+$conn = new mysqli("localhost", "root", "", "dbfood");
+
+// Vérifier la connexion
+if ($conn->connect_error) {
+    die("La connexion a échoué : " . $conn->connect_error);
+}
+
+// Traitement du formulaire de connexion
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupération des données du formulaire
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    // Prépare une déclaration select
+    $sql = "SELECT id, email, password FROM users WHERE email = ?";
+
+    if ($stmt = $conn->prepare($sql)) {
         // Lie les variables à la déclaration préparée en tant que paramètres
         $stmt->bind_param("s", $param_email);
 
@@ -35,24 +45,26 @@ if (empty($email_err) && empty($password_err)) {
                 if ($stmt->fetch()) {
                     if (password_verify($password, $hashed_password)) {
                         // Le mot de passe est correct, commence une nouvelle session
-                        
+
+                        // Démarrer la session
+                        session_start();
 
                         // Stocke les données dans les variables de session
                         $_SESSION["loggedin"] = true;
                         $_SESSION["id"] = $id;
                         $_SESSION["email"] = $email;
-                        
 
                         // Redirige l'utilisateur vers la page d'accueil
                         header("location: accueil.php");
+                        exit;
                     } else {
-                        // Affiche un message d'erreur si le mot de passe n'est pas valide
-                        $password_err = "Le mot de passe que vous avez entré n'est pas valide.";
+                        // Mot de passe incorrect
+                        echo "Le mot de passe que vous avez entré n'est pas valide.";
                     }
                 }
             } else {
-                // Affiche un message d'erreur si l'email n'existe pas
-                $email_err = "Aucun compte trouvé avec cet email.";
+                // Email non trouvé
+                echo "Aucun compte trouvé avec cet email.";
             }
         } else {
             echo "Oups ! Quelque chose s'est mal passé. Veuillez réessayer plus tard.";
@@ -62,7 +74,11 @@ if (empty($email_err) && empty($password_err)) {
         $stmt->close();
     }
 }
+
+// Fermer la connexion à la base de données
+$conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
