@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <title>iMangerMieux - Tracker d'Aliments et de Calories</title>
     <meta charset="utf-8" />
@@ -7,17 +8,16 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 </head>
+
 <body>
     <header>
         <h1>Dashboard</h1>
     </header>
     <nav>
-    <ul>
+        <ul>
             <li><a href="http://localhost/IDAW/Projet/Backend/accueil.php">Accueil</a></li>
             <li><a href="http://localhost/IDAW/Projet/Frontend/dashboard.php">Dashboard</a></li>
             <li><a href="http://localhost/IDAW/Projet/Backend/Historique des aliments.php">Historique des aliments</a></li>
@@ -25,92 +25,88 @@
             <li><a href="http://localhost/IDAW/Projet/Backend/logout.php">Deconnexion</a></li>
         </ul>
     </nav>
-<body>
-<div style="text-align: center;">
-<h4> Dans notre tableau de bord interactif, vous trouverez une représentation visuelle unique de votre consommation calorique. Notre tableau de bord circulaire (AU DESSOUS DU TABLEAU) innovant commence vide, mais dès que vous sélectionnez un aliment, il se remplit progressivement de calories pour vous permettre de suivre facilement votre apport quotidien. Chaque aliment que vous ajoutez contribue à colorer ce graphique, vous donnant un aperçu instantané de votre consommation. Notre design convivial et intuitif rend la gestion de votre régime alimentaire aussi simple que de cliquer sur vos choix préférés. Surveillez votre progression en temps réel et maintenez le contrôle total de votre nutrition grâce à notre tableau de bord interactif sur mesure.</h4>
+
+    <div style="text-align: center;">
+        <h4> Dans notre tableau de bord interactif, vous trouverez une représentation visuelle unique de votre consommation calorique. Notre tableau de bord circulaire (AU DESSOUS DU TABLEAU) innovant commence vide, mais dès que vous sélectionnez un aliment, il se remplit progressivement de calories pour vous permettre de suivre facilement votre apport quotidien. Chaque aliment que vous ajoutez contribue à colorer ce graphique, vous donnant un aperçu instantané de votre consommation. Notre design convivial et intuitif rend la gestion de votre régime alimentaire aussi simple que de cliquer sur vos choix préférés. Surveillez votre progression en temps réel et maintenez le contrôle total de votre nutrition grâce à notre tableau de bord interactif sur mesure.</h4>
+    </div>
+
+    <!-- Table HTML -->
+    <table id="productsTable" class="display">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Product Name</th>
+                <th>Nutrition Data Per</th>
+                <th>Energy (kcal)</th>
+                <th>Ajouter</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- Chart Container -->
+    <div style="width: 500px; height: 500px; margin: 0 auto; text-align: center;">
+    <canvas id="caloriesChart"></canvas>
 </div>
-<!-- Table HTML -->
-<table id="productsTable" class="display">
-    <thead>
-        <tr>
-            <th>Code</th>
-            <th>Product Name</th>
-            <th>Nutrition Data Per</th>
-            <th>Energy (kcal)</th>
-            <th>Ajouter</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
 
-<!-- Chart.js canvas for the circular chart -->
-<div style="text-align: center;">
-    <canvas id="caloriesChart" width="100" height="100"></canvas>
-</div>
+    <script>
+        // Initial calorie count
+        let totalCalories = 0;
 
-<script>
-var chart;
-
-$(document).ready(function () {
-    // Initialize Chart.js
-    var ctx = document.getElementById('caloriesChart').getContext('2d');
-    chart = new Chart(ctx, {
-        type: 'doughnut', // Circular chart type
-        data: {
-            labels: ['Calories Consommées', 'Calories Restantes'],
-            datasets: [
-                {
-                    data: [0, 2000], // Initial values, replace with your total calories
-                    backgroundColor: ['#FF5733', '#3333FF'], // Colors for the chart segments
-                },
-            ],
-        },
-    });
-
-    // Configuration DataTable
-    const table = $('#productsTable').DataTable({
-        "ajax": {
-            "url": "http://localhost/IDAW/Projet/Backend/users.php",
-            "dataSrc": ""
-        },
-        "columns": [
-            { "data": "code" },
-            { "data": "product_name_fr" },
-            { "data": "nutrition_data_per" },
-            { "data": "energy_kcal_value_kcal" },
-            {
-                "data": null,
-                "render": function (data, type, row) {
-                    return `<button onclick="addCalories(${data.energy_kcal_value_kcal})">Ajouter</button>`;
-                }
+        // Chart initialization
+        const ctx = document.getElementById('caloriesChart').getContext('2d');
+        const caloriesChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Consumed Calories', 'Remaining Calories'],
+                datasets: [{
+                    data: [totalCalories, 2000 - totalCalories], // 2000 is the total allowed calories
+                    backgroundColor: ['#36a2eb', '#ff6384'],
+                }]
             }
-        ]
-    });
+        });
 
-    function addCaloriesToChart(calories) {
-        // Récupérez la valeur actuelle des calories consommées
-        const currentCaloriesConsumed = chart.data.datasets[0].data[0];
+        // Configuration DataTable
+        const table = $('#productsTable').DataTable({
+            "ajax": {
+                "url": "http://localhost/IDAW/Projet/Backend/users.php",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "code" },
+                { "data": "product_name_fr" },
+                { "data": "nutrition_data_per" },
+                { "data": "energy_kcal_value_kcal" },
+                {
+                    "data": null,
+                    "render": function (data, type, row) {
+                        return `<button onclick="addCalories(${data.energy_kcal_value_kcal})">Ajouter</button>`;
+                    }
+                }
+            ]
+        });
 
-        // Ajoutez les nouvelles calories
-        const newCaloriesConsumed = currentCaloriesConsumed + calories;
+        // Function to update the chart
+        function updateChart() {
+            caloriesChart.data.datasets[0].data = [totalCalories, 2000 - totalCalories];
+            caloriesChart.update();
+        }
 
-        // Mettez à jour le graphique circulaire
-        updateChart(newCaloriesConsumed);
-    }
+        // Function to add calories on button click
+        window.addCalories = function (calories) {
+            // Update total calories
+            totalCalories += calories;
 
-    // Function to update the chart
-    function updateChart(energyKcal) {
-        // Update the data for the chart
-        chart.data.datasets[0].data = [energyKcal, 2000 - energyKcal]; // Update with your total calories
-        chart.update();
-    }
+            // Update the chart
+            updateChart();
+        };
+    </script>
 
-    function addCalories(energy_kcal_value_kcal) {
-        addCaloriesToChart(energy_kcal_value_kcal);
-    }
+</body>
 
-});
-</script>
+</html>
+
+
 
 
 
