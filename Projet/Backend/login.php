@@ -37,6 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Utilisateur trouvé, vérifier le mot de passe
         $row = $result->fetch_assoc();
         if (password_verify($password, $row["password"])) {
+            $_SESSION["login"]=true ;
+            $_SESSION["id"]=$row["id"] ;
             header("Location: accueil.php");
         } else {
             echo "Mot de passe incorrect.";
