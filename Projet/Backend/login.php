@@ -28,55 +28,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // Prépare une déclaration select
-    $sql = "SELECT id, email, password FROM users WHERE email = ?";
+    // Requête pour récupérer l'utilisateur avec l'email fourni
+    $sql = "SELECT * FROM users WHERE email = '$email'";
+    $result = $conn->query($sql);
 
-    if ($stmt = $conn->prepare($sql)) {
-        // Lie les variables à la déclaration préparée en tant que paramètres
-        $stmt->bind_param("s", $param_email);
-
-        // Définir les paramètres
-        $param_email = $email;
-
-        // Tentative d'exécution de la déclaration préparée
-        if ($stmt->execute()) {
-            // Stocke le résultat
-            $stmt->store_result();
-
-            // Vérifie si l'email existe, si oui, vérifie le mot de passe
-            if ($stmt->num_rows == 1) {
-                // Lie les variables de résultat
-                $stmt->bind_result($id, $email, $hashed_password);
-                if ($stmt->fetch()) {
-                    if (password_verify($password, $hashed_password)) {
-                        // Le mot de passe est correct, commence une nouvelle session
-
-                        // Démarrer la session
-                        session_start();
-
-                        // Stocke les données dans les variables de session
-                        $_SESSION["loggedin"] = true;
-                        $_SESSION["id"] = $id;
-                        $_SESSION["email"] = $email;
-
-                        // Redirige l'utilisateur vers la page d'accueil
-                        header("location: accueil.php");
-                        exit;
-                    } else {
-                        // Mot de passe incorrect
-                        echo "Le mot de passe que vous avez entré n'est pas valide.";
-                    }
-                }
-            } else {
-                // Email non trouvé
-                echo "Aucun compte trouvé avec cet email.";
-            }
+    if ($result->num_rows > 0) {
+        // Utilisateur trouvé, vérifier le mot de passe
+        $row = $result->fetch_assoc();
+        if (password_verify($password, $row["password"])) {
+            header("Location: accueil.php");
         } else {
-            echo "Oups ! Quelque chose s'est mal passé. Veuillez réessayer plus tard.";
+            echo "Mot de passe incorrect.";
         }
-
-        // Ferme la déclaration
-        $stmt->close();
+    } else {
+        echo "Aucun utilisateur trouvé avec cet email.";
     }
 }
 
@@ -84,12 +49,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn->close();
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>Connectez-vous</title>
 </head>
 <body>
     <h2>Connexion</h2>
@@ -101,10 +67,11 @@ $conn->close();
         <input type="password" name="password" required><br>
 
         <input type="submit" value="Se connecter">
-        <a href="register.php">Pas encore un compte ?</a></p>
+        <a href="register.php">S'inscrire</a></p>
     </form>
 </body>
 </html>
+
 
 
 
