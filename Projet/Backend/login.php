@@ -12,6 +12,7 @@
     
 
     <?php
+session_start();
 // Connexion à la base de données
 require_once 'config.php';
 
@@ -35,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         // Utilisateur trouvé, vérifier le mot de passe
         $row = $result->fetch_assoc();
-        if (password_verify($password, $row["password"])) {
+        if ($password = $row["password"]) {
             header("Location: accueil.php");
             // Vous pouvez rediriger l'utilisateur vers une page de tableau de bord ou effectuer d'autres actions après la connexion réussie.
         } else {
