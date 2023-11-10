@@ -12,7 +12,6 @@
     
 
     <?php
-session_start()    ;
 // Connexion à la base de données
 require_once 'config.php';
 
@@ -24,7 +23,7 @@ if ($conn->connect_error) {
 }
 
 // Traitement du formulaire de connexion
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST['submit'])) {
     // Récupération des données du formulaire
     $email = $_POST["email"];
     $password = $_POST["password"];
@@ -37,9 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Utilisateur trouvé, vérifier le mot de passe
         $row = $result->fetch_assoc();
         if (password_verify($password, $row["password"])) {
-            $_SESSION["login"]=true ;
-            $_SESSION["id"]=$row["id"] ;
-            header("Location: accueil.php");
+            echo "Connexion réussie !";
+            // Vous pouvez rediriger l'utilisateur vers une page de tableau de bord ou effectuer d'autres actions après la connexion réussie.
         } else {
             echo "Mot de passe incorrect.";
         }
@@ -51,7 +49,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Fermer la connexion à la base de données
 $conn->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -69,13 +66,11 @@ $conn->close();
         <label>Mot de passe:</label>
         <input type="password" name="password" required><br>
 
-        <input type="submit" value="Se connecter">
+        <input type="submit" name="submit" value="Se connecter">
         <a href="register.php">S'inscrire</a></p>
     </form>
 </body>
 </html>
-
-
 
 
 <style>
