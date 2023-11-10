@@ -22,9 +22,8 @@ if ($conn->connect_error) {
     die("La connexion a échoué : " . $conn->connect_error);
 }
 
-// Traitement du formulaire d'inscription
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupération des données du formulaire
     $email = $_POST["email"];
     $password = $_POST["password"];
     $confirm_password = $_POST["confirm_password"];
@@ -38,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($password != $confirm_password) {
         echo "Les mots de passe ne correspondent pas.";
     } else {
-        // Hasher le mot de passe
+        
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // Insérer les données dans la table "users"

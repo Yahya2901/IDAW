@@ -30,7 +30,7 @@
         <h4> Dans notre tableau de bord interactif, vous trouverez une représentation visuelle unique de votre consommation calorique. Notre tableau de bord circulaire (AU DESSOUS DU TABLEAU) innovant commence vide, mais dès que vous sélectionnez un aliment, il se remplit progressivement de calories pour vous permettre de suivre facilement votre apport quotidien. Chaque aliment que vous ajoutez contribue à colorer ce graphique, vous donnant un aperçu instantané de votre consommation. Notre design convivial et intuitif rend la gestion de votre régime alimentaire aussi simple que de cliquer sur vos choix préférés. Surveillez votre progression en temps réel et maintenez le contrôle total de votre nutrition grâce à notre tableau de bord interactif sur mesure.</h4>
     </div>
 
-    <!-- Table HTML -->
+    
     <table id="productsTable" class="display">
         <thead>
             <tr>
@@ -44,23 +44,22 @@
         <tbody></tbody>
     </table>
 
-    <!-- Chart Container -->
+    
     <div style="width: 600px; height: 600px; margin: 0 auto; text-align: center;">
     <canvas id="caloriesChart"></canvas>
 </div>
 
     <script>
-        // Initial calorie count
+        
         let totalCalories = 0;
 
-        // Chart initialization
         const ctx = document.getElementById('caloriesChart').getContext('2d');
         const caloriesChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
                 labels: ['Consumed Calories', 'Remaining Calories'],
                 datasets: [{
-                    data: [totalCalories, 3000 - totalCalories], // 2000 is the total allowed calories
+                    data: [totalCalories, 3000 - totalCalories], 
                     backgroundColor: ['#36a2eb', '#ff6384'],
                 }]
             }
@@ -68,7 +67,7 @@
         
     
     
-        // Configuration DataTable
+        
         const table = $('#productsTable').DataTable({
             "ajax": {
                 "url": "http://localhost/IDAW/Projet/Backend/users.php",
@@ -89,18 +88,18 @@
             ]
         });
 
-        // Function to update the chart
+        
         function updateChart() {
             caloriesChart.data.datasets[0].data = [totalCalories, 3000 - totalCalories];
             caloriesChart.update();
         }
 
-        // Function to add calories on button click
+        
         window.addCalories = function (calories) {
-            // Update total calories
+            
             totalCalories += calories;
 
-            // Update the chart
+            
             updateChart();
         };
     </script>

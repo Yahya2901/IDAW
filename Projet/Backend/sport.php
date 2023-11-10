@@ -37,7 +37,6 @@
     </thead>
     <tbody>
         <?php
-        // Définir un tableau de sports avec les taux de calories correspondants
         $sports = array(
             "Course à pied" => 600,
             "Natation" => 500,
@@ -54,7 +53,6 @@
             "Golf" => 250
         );
 
-        // Parcourir le tableau et afficher chaque sport et son taux de calories dans le tableau
         foreach ($sports as $sport => $calories) {
             echo "<tr><td>$sport</td><td>$calories</td></tr>";
         }

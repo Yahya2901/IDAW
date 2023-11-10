@@ -17,19 +17,14 @@ session_start();
 require_once 'config.php';
 
 $conn = new mysqli("localhost", "root", "", "dbfood");
-
-// Vérifier la connexion
 if ($conn->connect_error) {
     die("La connexion a échoué : " . $conn->connect_error);
 }
 
-// Traitement du formulaire de connexion
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupération des données du formulaire
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // Requête pour récupérer l'utilisateur avec l'email fourni
     $sql = "SELECT * FROM users WHERE email = '$email'";
     $result = $conn->query($sql);
 
@@ -38,7 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         if ($password = $row["password"]) {
             header("Location: accueil.php");
-            // Vous pouvez rediriger l'utilisateur vers une page de tableau de bord ou effectuer d'autres actions après la connexion réussie.
         } else {
             echo "Mot de passe incorrect.";
         }
@@ -47,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Fermer la connexion à la base de données
 $conn->close();
 ?>
 
@@ -74,7 +67,7 @@ $conn->close();
 </html>
 
 <style>
-    /* Reset des styles par défaut du navigateur */
+    
 body, h2, form {
     margin: 0;
     padding: 0;

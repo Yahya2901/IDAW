@@ -27,7 +27,6 @@
     un aliment que vous ne consommez pas ou modifier ses données. La liste contient un choix multiple d'aliments necessaires pour une bonne santé.</h4>
 </div>
 <hr>
-<!-- Table HTML -->
 <table id="productsTable" class="display">
     <thead>
         <tr>
@@ -50,7 +49,7 @@
     <tbody></tbody>
 </table>
 
-<!-- Modal for editing products -->
+
 <div id="editModal" style="display:none; position:fixed; top:50%; left:50%; transform: translate(-50%, -50%); background:white; padding:20px;">
     <h2>Edit Product</h2>
     <form id="editForm">
