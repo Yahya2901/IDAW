@@ -11,7 +11,7 @@
 
     
 
-<?php
+    <?php
 // Connexion à la base de données
 require_once 'config.php';
 
@@ -86,7 +86,6 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
