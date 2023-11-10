@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 09 nov. 2023 à 20:22
+-- Généré le : ven. 10 nov. 2023 à 02:58
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -408,7 +408,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `height` int NOT NULL,
   `weight` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`, `age`, `gender`, `activity_level`, `height`, `weight`) VALUES
+(1, 'yaya@gmail.com', '$2y$10$tAwZItIgqFRQ3', 24, 'male', 'moderate', 186, 98),
+(2, 'ouss@gmail.com', '$2y$10$VyQdaxP0jUUqb', 18, 'male', 'moderate', 180, 80),
+(3, 'sanji@gmail.com', '$2y$10$ba.utoIQjRY6G', 25, 'male', 'high', 190, 85),
+(4, 'admin@gmail.com', '$2y$10$waAGS2ZoAzULw', 25, 'male', 'moderate', 188, 90);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -23,7 +23,7 @@ if ($conn->connect_error) {
 }
 
 // Traitement du formulaire de connexion
-if (isset($_POST['submit'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupération des données du formulaire
     $email = $_POST["email"];
     $password = $_POST["password"];
@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
         // Utilisateur trouvé, vérifier le mot de passe
         $row = $result->fetch_assoc();
         if (password_verify($password, $row["password"])) {
-            echo "Connexion réussie !";
+            header("Location: accueil.php");
             // Vous pouvez rediriger l'utilisateur vers une page de tableau de bord ou effectuer d'autres actions après la connexion réussie.
         } else {
             echo "Mot de passe incorrect.";
@@ -66,12 +66,11 @@ $conn->close();
         <label>Mot de passe:</label>
         <input type="password" name="password" required><br>
 
-        <input type="submit" name="submit" value="Se connecter">
+        <input type="submit" value="Se connecter">
         <a href="register.php">S'inscrire</a></p>
     </form>
 </body>
 </html>
-
 
 <style>
     /* Reset des styles par défaut du navigateur */
